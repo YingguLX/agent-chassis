@@ -23,13 +23,14 @@ The following parameters must be inferred, obtained, or confirmed before executi
 | --- | --- |
 | `startup_mode` | Startup mode: `auto_current_project` or `explicit_template_source`. |
 | `project_root` | Target project root directory; defaults to the current working directory in automatic mode. |
-| `template_root` | Directory containing the six templates; defaults to `project_root` in automatic mode and is provided by the user in explicit mode. If `template_root` equals `project_root`, the templates are already in the target project. |
+| `template_root` | Directory containing the six templates; defaults to `project_root` in automatic mode and is provided by the user in explicit mode. If `template_root` equals `project_root`, the templates are already in the target project. It must identify the current template family and origin, and it must not default to, infer from, or implicitly point to sibling template branches, external forks, release packages, or unknown template families. |
+| `template_backup_root` | Optional read-only clean template-backup root; empty by default and provided explicitly by the user as an independent path. When provided, it must be a clean backup from the same current template family and origin, contain the six controlled-document templates, and be used only for full six-template constraint-completeness back-checks, structure fingerprints, strong constraints, fixed protocol fields, and missing-item restoration checks. It **must not be written**, **must not be formatted**, **must not be included in `output_map`**, **must not be treated as a project fact source**, and **must not default to, infer from, or implicitly point to sibling template branches, external forks, release packages, or unknown template families**. If absent, the instantiation stage must try to use the six templates from the same-family Git `HEAD` of the current checkout as a read-only closure baseline. If the Git baseline is unavailable or fails template-family/origin validation, the final report must mark the run as **closed-loop not passed** and must not claim that the full-template missing-item back-check passed. |
 | `output_map` | Exact mapping from the six templates to the six output files; automatic mode may infer in-place writes to the six controlled documents. |
 | `target_version` | Output document version; for a brand-new first instantiation with no previous version, default to `v1.0`. |
 | `updated_date` | Output document update date; defaults to the current date in `YYYY-MM-DD` format. |
 | `document_language` | Output document language; defaults to the template language unless the user specifies otherwise. |
 | `import_existing_docs` | Whether to import facts from existing documents under `project_root`; enabled by default, but every imported fact must be checked against current authoritative project evidence. |
-| `import_external_docs` | External supplemental materials; empty by default and used only when the user explicitly provides paths, URLs, or text during confirmation. |
+| `import_external_docs` | External supplemental materials; empty by default and used only when the user explicitly provides paths, URLs, or text during confirmation. It must not default to, infer from, or implicitly point to sibling template branches, external forks, release packages, or unknown template families, and it must not become a template baseline or back-check source. |
 | `authoritative_fact_sources` | Authoritative fact-source inventory established by the agent from project evidence. |
 | `text_format_policy` | Text encoding, line endings, EOF newline, trailing whitespace removal, and Markdown check policy; default is valid Markdown, UTF-8 BOM, CRLF, EOF newline, and no trailing whitespace. |
 | `subagent_policy` | Automatic quality-guard strategy, including whether subagents can be used, how read-only and write tasks are split, and how fallback is handled. |
@@ -53,16 +54,23 @@ Infer the mode in this order:
 2. If the current working directory is missing any of the six templates, require the user to provide `template_root`; do not guess the template location.
 3. If the current working directory already contains instantiated project documents, stop and confirm whether the user wants to import existing document facts, overwrite, or use another output directory.
 4. If the current working directory contains a mixed state of partial templates, partial instantiated documents, or mismatched responsibilities, stop and report the mixed state.
-5. If the user chooses an explicit template source, `template_root` must point directly to the directory containing the six templates.
+5. If the user chooses an explicit template source, `template_root` must point directly to the directory containing the six templates and pass same-family/same-origin validation against the current template identity before it can be accepted.
 6. Explicit user parameters always override inferred values; conflicting explicit parameters must stop the flow and be reported.
 
 `output_map` may be inferred safely in automatic mode, but it must be shown item by item in the parameter confirmation report. Before writing, reconfirm that the output paths are exactly the target project's six controlled-document locations and that the user authorized formal instantiation or updates for those files.
+
+`template_root`, `template_backup_root`, and `import_external_docs` source identity must be validated before they influence closure or back-check decisions. Same-family/same-origin validation must reject unknown identity, sibling template branches, external forks, release packages, and unknown template families. A source that fails this validation must not be used as the preferred baseline, fallback baseline, missing-item back-check source, or evidence for template completeness.
+
+`template_backup_root` is not inferred from `template_root`. If it is absent, it does not block instantiation. If the user provides it, validate that the six controlled-document templates are complete, readable, responsibility-matched, outside `output_map`, and same-family as the current template set. Once provided and validated, `template_backup_root` is the **preferred reference baseline** for full six-template constraint completeness and missing-item restoration. If it conflicts with `template_root` on heading structure, section responsibilities, table/list responsibilities, fixed protocol fields, strong-constraint lines, quality gates, stop conditions, or report fields, or if its family/origin cannot be proven, **stop and report**.
+
+When `template_backup_root` is absent, the instantiation stage must not treat an in-place rewritten `template_root` as a clean closure reference. It must try to read the six templates from Git `HEAD` only from the current checkout/repository at the same relative paths as the six templates. The Git `HEAD` baseline must be same-family/same-origin, readable, complete for all six templates, responsibility-matched, and likely uninstantiated. If it is available, use it for the full-template missing-item back-check. If it is unavailable, indeterminate, outside the current checkout/repository, not at the same relative paths, from an unknown or sibling branch source, or not representative of clean same-family templates, generation may continue, but the final report must mark the run as **closed-loop not passed**, explain why the full-template missing-item back-check was not completed, and must not call that state "passed".
 
 ### 1.4 Parameter Confirmation Stop Point
 
 After automatic inference, stop and output a parameter confirmation report. Wait for the user to modify parameters or confirm execution. The report must include:
 
-- Inferred `startup_mode`, `project_root`, `template_root`, and `output_map`.
+- Inferred `startup_mode`, `project_root`, `template_root`, `template_backup_root`, and `output_map`.
+- `template_backup_root` status: absent, provided and complete, provided but incomplete, unreadable, conflicting with the template source, failing template-family/origin validation, or unusable as the full-template missing-item back-check baseline; if absent, also state whether the same-family Git `HEAD` template baseline from the current checkout can serve as the closure reference.
 - Whether the six templates are complete, appear uninstantiated, or show a mixed state.
 - `target_version`, `updated_date`, `document_language`, and `text_format_policy`.
 - `import_existing_docs`, `import_external_docs`, `authoritative_fact_sources`, and existing/external document import policy.
@@ -72,11 +80,11 @@ After automatic inference, stop and output a parameter confirmation report. Wait
 
 ### 1.5 Parameter Modification, Locking, and Execution Gate
 
-If the user modifies parameters during the confirmation stage, revalidate all related inferred parameters. If the change affects `project_root`, `template_root`, or `output_map`, output a new parameter confirmation report.
+If the user modifies parameters during the confirmation stage, revalidate all related inferred parameters. If the change affects `project_root`, `template_root`, `template_backup_root`, or `output_map`, output a new parameter confirmation report.
 
 Do not start full fact scanning, bulk project reading, file writing, or formatting before parameters are locked. Only after the user clearly says something equivalent to "parameters confirmed, execute", "execute with the above parameters", or "lock parameters and execute" may you enter the instantiation stage.
 
-If the user says only "execute" but parameters still have conflicts, missing values, path risks, or unclear output boundaries, keep reporting the gaps and do not execute. After parameters are locked, do not implicitly change `project_root`, `template_root`, `output_map`, `target_version`, or `updated_date`. If locked parameters conflict with actual files during instantiation, stop and report; do not silently switch paths.
+If the user says only "execute" but parameters still have conflicts, missing values, path risks, or unclear output boundaries, keep reporting the gaps and do not execute. After parameters are locked, do not implicitly change `project_root`, `template_root`, `template_backup_root`, `output_map`, `target_version`, or `updated_date`. If locked parameters conflict with actual files during instantiation, stop and report; do not silently switch paths.
 
 ## 2. Fixed Protocol Fields
 
@@ -155,6 +163,25 @@ Instantiation must use the templates as the structural baseline:
 
 Wording may be adjusted to make the output natural and readable as formal target-project documentation, provided constraint strength is not weakened. Strong constraints in the templates must not be changed into suggestions, tendencies, options, or broad slogans.
 
+> **Hard gate: instantiation is not summarization.** The agent must preserve or equivalently copy the template skeleton first, then backfill project facts. It must not rewrite from scratch, redesign the document set, compress the heading tree, or merge strong constraints into a broad overview.
+
+Before and after instantiation, build a template-structure fingerprint and verify it during quality checks:
+
+| Fingerprint item | Required check |
+| --- | --- |
+| Heading structure | Count Markdown headings, heading-level sequences, and key heading names for all six templates and outputs. |
+| Section responsibilities | Check, document by document, that responsibilities, process fields, quality gates, stop conditions, and report fields carried by template headings still exist in the corresponding output. |
+| Table/list responsibilities | Check, document by document, that table responsibilities, list responsibilities, task groups, verification gates, and prohibitions are preserved or projectized at equal strength. |
+| Fixed protocol fields | Check that the six document names, quality-guard protocol fields, `explore`, and `general` are preserved literally. |
+| Template reference source | Reference priority is same-family `template_backup_root` -> same-family Git `HEAD` template baseline -> **closed-loop not passed**. An in-place rewritten `template_root` must not be presented as a clean reference source, and arbitrary, sibling-branch, fork, release-package, or unknown-family sources must not become closure references. |
+| Full-template constraint source | All six templates are constraint sources; `Automatic Quality Guard` is the protected high-risk quality-guard focus, but it is not the only protected material. |
+| Strong-constraint lines | Lines in all six templates containing `must`, `must not`, `only`, `prohibited`, `stop and report`, or equivalent hard obligations must not be deleted, softened, or merged into slogans. |
+| Missing-item back-check | If same-family `template_backup_root` is configured, back-check every output against the backup template; if absent, first use the same-family Git `HEAD` template baseline for the back-check. Missing items must be restored before completion, or the agent must stop and report. Without an available clean same-family baseline, the final report must be marked **closed-loop not passed**. |
+| Not-applicable exemptions | Rules, processes, quality gates, stop conditions, and strong constraints must not be deleted as `not applicable`; factual or public-entry content may be exempted only when the template allows trimming and evidence is recorded. |
+| Placeholder state | Every `{{%...}}` placeholder must be replaced, marked `not applicable`, `not established`, or `pending confirmation`, or the agent must stop and ask. |
+
+All headings, table/list responsibilities, strong constraints, quality gates, stop conditions, final-report fields, and placeholder-handling rules in the six templates must not silently disappear. The automatic quality guard, predecessor dependency, stage independence, `explore` / `general` assignment, queueing, stop-for-continuation, and no-capability downgrade boundaries in `agents/RULES.md` are the high-risk core protocol of this Context-Engineering design. Any deletion, merge, rename, downgrade, summarization, unrestored missing item, or evidence-free exemption is P0/P1 and must be fixed or reported as a stop condition.
+
 ## 6. Public Entries, API, and ABI
 
 A public entry is any user-visible, user-obtainable, and user-verifiable API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, or documentation entry.
@@ -186,6 +213,8 @@ The instantiated rule system must require agents to automatically run the risk-a
 - When subagents are supported, the agent must not proactively downgrade. If concurrency is insufficient, tasks must queue. If hard limits are exhausted, the agent must stop for continuation and preserve task briefs, temporary artifact states, and the remaining queue.
 
 Only when no subagent capability exists may the work be downgraded into file-based, staged, or scoped phases. Downgrade must state the capability gap, substitute process, and residual risk in the report.
+
+> **Full-template constraint source must not be weakened:** `Automatic Quality Guard` defines this rule system's protected high-risk quality-guard focus. Instantiation must preserve automatic execution, predecessor dependency, stage independence, read/write isolation, queueing, stop-for-continuation, and downgrade boundaries. It must not rewrite them into a generic "recommended review" or optional check. This focus-area protection must not be interpreted as permission to remove other sections in this six-document template set, tables, lists, quality gates, stop conditions, or report fields.
 
 ## 8. Placeholder Backfill Rules
 
@@ -290,6 +319,11 @@ After generation or modification, run these checks:
 - Markdown structure, tables, fences, lists, and links are valid.
 - Text encoding, line endings, EOF newline, and trailing whitespace comply with `text_format_policy`.
 - `git diff --check` or an equivalent whitespace check passes.
+- `template_root`, `template_backup_root` when provided, `import_external_docs`, and any Git `HEAD` closure baseline have passed template-family/origin validation; unknown identity, sibling-branch, fork, release-package, or unknown-family sources have been rejected.
+- Template-structure fingerprint checks pass; key headings, full-template constraint sources, fixed protocol fields, strong-constraint lines, quality gates, stop conditions, and report fields are not lost, downgraded, or summarized.
+- If `template_backup_root` is provided, it is complete, used read-only, not included in `output_map`, same-family as the current template set, and not in full-template constraint-structure conflict with `template_root`.
+- If `template_backup_root` is provided, every output has been back-checked for missing items; found missing items have been restored, allowed exemptions have evidence, and unrestorable items have triggered a stop report.
+- If `template_backup_root` is absent, the same-family Git `HEAD` template baseline from the current checkout/repository at the same relative paths has been tried for the full-template missing-item back-check; if the Git baseline is unavailable or fails source-identity validation, the final report is marked **closed-loop not passed** and does not claim that the full-template missing-item back-check passed.
 
 If markdownlint is unavailable, an equivalent check must be run and the unavailable reason, substitute check, and residual risk must be reported. `MD013` line length may be exempted according to project rules; other Markdown structure issues must not be skipped.
 
@@ -344,10 +378,13 @@ Stop and report when any of the following occurs:
 - Required startup parameters are missing and cannot be confirmed from the user or safe fact sources.
 - Output paths may overwrite unauthorized files.
 - Locked parameters conflict with actual files.
+- `template_root`, `template_backup_root`, `import_external_docs`, or a Git `HEAD` closure baseline has unknown source identity, belongs to a sibling branch, fork, release package, or unknown template family, or otherwise fails template-family/origin validation.
+- A provided `template_backup_root` does not exist, is missing any of the six documents, is unreadable, is included in `output_map`, is being written to, is not same-family as the current template set, or has a full-template constraint-structure conflict with the template source.
 - Target project facts are insufficient to support public capabilities, compatibility boundaries, or user manual content.
 - Template defects prevent project facts or strong constraints from being carried without loss.
 - Key placeholders cannot be cleared without fabricating facts.
-- Checks find weakened strong constraints that cannot be automatically fixed.
+- Checks find that any template strong constraint, document responsibility, table/list responsibility, quality gate, stop condition, or report field has been weakened and cannot be automatically fixed.
+- Checks find that `template_backup_root` is configured but full-template missing-item back-checks were not run, missing items were not restored, exemptions lack evidence, or the quality-guard rule source, subagent discipline, missing-item back-check rules, stop conditions, or report fields have been deleted, merged, renamed, summarized, or weakened and cannot be fixed in this round.
 - Markdown, encoding, line ending, EOF newline, trailing whitespace, or diff checks cannot pass and cannot be fixed.
 - Subagent capability is insufficient and downgrade would weaken strong constraints or isolation requirements.
 
@@ -364,6 +401,8 @@ After completion, output a brief report that includes at least:
 - Key facts marked `not applicable` or `not established`.
 - TODO write status.
 - Automatic quality-guard execution summary.
+- Template-family/origin validation result for `template_root`, `template_backup_root`, `import_external_docs`, and any Git `HEAD` template baseline, including any stopped unknown, sibling-branch, fork, release-package, or unknown-family source.
+- `template_backup_root` status, same-family Git `HEAD` template-baseline status, closure conclusion, full-template missing-item back-check result, restored missing items, allowed exemptions, and unrestorable items.
 - Markdown, encoding, line ending, EOF newline, trailing whitespace, and diff check results.
 - Reason why build or release validation was not run.
 - Residual risks.
