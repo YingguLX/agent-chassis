@@ -1,4 +1,4 @@
-# README
+﻿# README
 
 > **Not a prompt. A constraint skeleton.** 🏗️
 
@@ -23,7 +23,7 @@ Agent Chassis isn't prompt engineering. It's **constraint engineering**. 🛡️
 
 Use Agent Chassis in two separate steps: first place the six controlled document templates in your target project, then instantiate those templates for that project's real facts.
 
-For agent-assisted setup, open `BOOTSTRAP.md` in this repository and copy its prompt text into your AI Agent chat after the six templates are in the target project. The bootstrap prompt tells the agent to confirm paths, fact sources, output boundaries, version data, and quality checks before it writes the project-specific controlled documents.
+For agent-assisted setup, open `BOOTSTRAP.md` in this repository and copy its prompt text into your AI Agent chat after the six templates are in the target project. The bootstrap prompt tells the agent to confirm paths, document import policy, authoritative fact sources, version data, and quality checks before it writes the project-specific controlled documents.
 
 `BOOTSTRAP.md` is not a seventh controlled document. Do not copy it into the target project, do not version-sync it with the six documents, and do not treat it as the runtime rulebook. After instantiation, ongoing AI-assisted development runs through the project's own `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
 
@@ -69,12 +69,12 @@ README.md speaks only to humans. It answers three questions: What is this, who s
 
 AGENTS.md is the agent's rulebook, speaking in **must / must not / can only**. It defines:
 
-- **🔒 Trigger-Command Prefix Chains** — `Run Diff Review` → `Run Security Awareness` → `Run Factual Boundary Check` → `Run Documentation Proofread` (lightweight group). Full group: `Run Impact Assessment` → `Run Security Scan` → `Run Static Analysis` → `Run Documentation Generation`. The next stage **must not** start until the previous one completes. This isn't a suggestion — it's a hard gate.
+- **🔒 Ordered Quality Gates** — lightweight checks and full checks run in dependency order. Later checks **must not** start until the required earlier checks are complete and accepted. This isn't a suggestion — it's a hard gate.
 - **👁️ Subagent Type Binding** — `explore` is read-only; `general` can write. Different subagents for reading and writing, preventing the "let me just fix this while I'm here" overreach.
 - **🧾 Read Receipt** — Every time an agent reads AGENTS.md, its next visible response must declare the current version and briefly summarize the file. Prevents "pretending to have read it."
 - **⚡ Load Check** — When the user message contains the exact literal `test build rules`, the agent must reply directly with the version number and summary. No tools. No misinterpreting it as a build/test request.
 
-**💡 Innovation:** Turns "polite requests in a prompt" into "machine-verifiable execution protocols." Trigger commands are switches, not suggestions.
+**💡 Innovation:** Turns "polite requests in a prompt" into "machine-verifiable execution protocols." Quality gates are enforced automatically, not left to memory.
 
 ---
 
@@ -148,7 +148,7 @@ Its content is constrained by AGENTS.md and RULES.md:
 
 - Can only explain **released, verifiable** capabilities
 - Cannot invent entries for template completeness
-- Large-scale rewrites can **only** be triggered by `Run Documentation Generation`
+- Large-scale rewrites can **only** run through the full documentation generation workflow
 - Small-scope syncs can only modify directly related text within authorized scope
 
 **💡 Innovation:** User documentation is explicitly constrained as a "downstream of facts" — not "another independent narrative."
@@ -161,7 +161,7 @@ Its content is constrained by AGENTS.md and RULES.md:
 | --- | --- | --- |
 | Document Organization | One giant prompt blob | Six controlled documents with isolated responsibilities |
 | Conflict Resolution | No rules, model guesses | `README > AGENTS > RULES > BASE > TODO > DOCUMENTATION` |
-| Execution Trigger | "Please help me check this" | Hard command switches like `Run Diff Review` with prefix-chain gates |
+| Execution Trigger | "Please help me check this" | Automatic quality gates with ordered dependency checks |
 | Subagent Permissions | No read/write distinction | `explore` / `general` types bound to access boundaries |
 | Rule Protection | None | Chapter 13 anti-weakening gate: "must" cannot become "should" |
 | Version Management | Each doc on its own | All six documents **must** increment in sync, identical versions |
@@ -182,21 +182,24 @@ Its content is constrained by AGENTS.md and RULES.md:
 
 ## Quick Start ⚡
 
-If you want an agent to instantiate the templates for a real project, copy the six controlled documents first, then paste the text from `BOOTSTRAP.md` into the AI Agent chat. `BOOTSTRAP.md` itself is not copied into the target project.
+If you want an agent to instantiate the templates for a real project, copy the six controlled document templates first, then paste the text from `BOOTSTRAP.md` into the AI Agent chat. `BOOTSTRAP.md` itself is not copied into the target project.
 
 ```bash
-# 1. Copy the six documents into your project root
+# 1. Copy the six controlled document templates into your project root
 git clone https://github.com/yourname/agent-chassis.git
 
-# 2. Globally replace all {{%...%}} placeholders
-#    PROJECT_NAME → your project name
-#    DOCUMENT_VERSION → initial version (e.g., v0.1)
-#    Fill the rest as needed
+# 2. Copy the text from BOOTSTRAP.md into your AI Agent chat
+#    The agent will infer project_root, template_root, output_map,
+#    target_version, updated_date, import_existing_docs,
+#    import_external_docs, fact sources, and format policy.
 
-# 3. Point CodexCLI at it
+# 3. Review the parameter confirmation report
+#    Edit inferred parameters if needed, then explicitly confirm execution.
+
+# 4. After instantiation, point CodexCLI at the project rules
 codex --instructions AGENTS.md
 
-# 4. Start working. The agent reads AGENTS.md first, then RULES, BASE, TODO by responsibility, and writes DOCUMENTATION only when needed.
+# 5. Start working. The agent reads AGENTS.md first, then RULES, BASE, TODO by responsibility, and writes DOCUMENTATION only when needed.
 ```
 
 ---
