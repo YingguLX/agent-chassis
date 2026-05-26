@@ -19,6 +19,16 @@ Agent Chassis isn't prompt engineering. It's **constraint engineering**. 🛡️
 
 ---
 
+## How to Use Them 🧭
+
+Use Agent Chassis in two separate steps: first place the six controlled document templates in your target project, then instantiate those templates for that project's real facts.
+
+For agent-assisted setup, open `BOOTSTRAP.md` in this repository and copy its prompt text into your AI Agent chat after the six templates are in the target project. The bootstrap prompt tells the agent to confirm paths, fact sources, output boundaries, version data, and quality checks before it writes the project-specific controlled documents.
+
+`BOOTSTRAP.md` is not a seventh controlled document. Do not copy it into the target project, do not version-sync it with the six documents, and do not treat it as the runtime rulebook. After instantiation, ongoing AI-assisted development runs through the project's own `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
+
+---
+
 ## The Six-Document Skeleton 🦴
 
 ```text
@@ -171,6 +181,8 @@ Its content is constrained by AGENTS.md and RULES.md:
 ---
 
 ## Quick Start ⚡
+
+If you want an agent to instantiate the templates for a real project, copy the six controlled documents first, then paste the text from `BOOTSTRAP.md` into the AI Agent chat. `BOOTSTRAP.md` itself is not copied into the target project.
 
 ```bash
 # 1. Copy the six documents into your project root
