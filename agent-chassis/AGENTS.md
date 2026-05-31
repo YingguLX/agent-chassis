@@ -1,84 +1,132 @@
-# {{%PROJECT_NAME}} Agent Execution Rules
+# `{{%PROJECT_NAME}}` Agent Execution Rules
 
 ## 1. Version Information
 
 - Current version: `{{%DOCUMENT_VERSION}}`
-- Updated: {{%UPDATED_DATE}}
-- Synchronized documents: `README.md {{%DOCUMENT_VERSION}}`, `AGENTS.md {{%DOCUMENT_VERSION}}`, `agents/RULES.md {{%DOCUMENT_VERSION}}`, `agents/BASE.md {{%DOCUMENT_VERSION}}`, `agents/TODO.md {{%DOCUMENT_VERSION}}`, `doc/DOCUMENTATION.md {{%DOCUMENT_VERSION}}`
-- Fixed protocol fields: `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, `doc/DOCUMENTATION.md`, `test build rules`, `explore`, and `general` are protocol constants of this document-maintenance framework. They must be used exactly as written and must not be replaced by placeholders, renamed, translated, split, or merged.
+- Updated: `{{%UPDATED_DATE}}`
+- Synchronized documents: `README.md` `{{%DOCUMENT_VERSION}}`, `AGENTS.md` `{{%DOCUMENT_VERSION}}`, `agents/RULES.md` `{{%DOCUMENT_VERSION}}`, `agents/BASE.md` `{{%DOCUMENT_VERSION}}`, `agents/TODO.md` `{{%DOCUMENT_VERSION}}`, `doc/DOCUMENTATION.md` `{{%DOCUMENT_VERSION}}`
+- Fixed protocol fields: `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, `doc/DOCUMENTATION.md`, `test build rules`, `incremental difference domain`, `incremental security domain`, `factual boundary domain`, `document quality domain`, `public impact domain`, `global security domain`, `structural coverage domain`, `manual output domain`, `explore`, and `general` are protocol constants of the document maintenance framework. They **must be used exactly as written** and ***must not be replaced by placeholders, renamed, translated, split, or merged***.
 
 ## 2. Document Role
 
-`AGENTS.md` is the agent execution rulebook for {{%PROJECT_NAME}}. It is written for agents participating in the project and carries loading order, version synchronization, document priority, automatic quality guard entry, minimum context, and non-ignorable high-level red lines.
+`AGENTS.md` is the agent execution rulebook for `{{%PROJECT_NAME}}`, written for agents participating in this project. It carries loading order, automatic quality guard, implicit quality guard, the hard write gate for project constraint documents, version synchronization, document priority, minimum context, and non-ignorable high-level red lines.
 
-This document does not expand detailed engineering rules, coding style constraints, the full factual baseline, follow-up plans, quality-guard details, or user manual writing rules. Detailed engineering rules, automatic quality-guard workflows, and user manual writing rules shared by developers and agents are defined in `agents/RULES.md`; `agents/RULES.md` is not an agent-private prompt, but an engineering constraint shared by humans and agents. Project entry and navigation are governed by `README.md`; the factual baseline is governed by `agents/BASE.md`; follow-up plans and known issues are governed by `agents/TODO.md`; the formal user manual is governed by `doc/DOCUMENTATION.md`.
+This document does not expand detailed engineering rules, coding style constraints, build rules, automatic quality guard details, implicit quality guard details, or user manual writing details. Detailed engineering rules, automatic quality-control workflows, and user manual writing rules shared by developers and agents are governed uniformly by `agents/RULES.md`; `agents/RULES.md` is not an agent-private prompt, but an engineering constraint shared by humans and agents. Project entry and document navigation are governed by `README.md`; the factual baseline is governed by `agents/BASE.md`; follow-up implementation plans and known issue records are governed by `agents/TODO.md`; the formal user manual is governed by `doc/DOCUMENTATION.md`.
 
-## 3. Document Priority
+## 3. Hard Write Gate for Project Constraint Documents
 
-When the six documents conflict, resolve the conflict by responsibility:
+The protected project constraint documents in this section are fixed as `README.md`, `AGENTS.md`, and `agents/RULES.md`. Except for the narrow version-metadata exception explicitly defined in this section, any write, revision, move, deletion, reordering, format repair, link repair, table repair, heading repair, wording refinement, rule merge, or body synchronization that touches any content in any of these three documents belongs to the protected content scope.
+
+When this gate is triggered, the agent must:
+
+1. Immediately stop the current task and all subsequent tools, subagents, and automation chains. The agent must not continue writing on the grounds of convenient repair, consistency, an existing plan, or version synchronization.
+2. List a visible risk warning that at least includes context-compression loss, attention loss from noise, self-weakening rules, priority-chain damage, version/cross-reference pollution, weakened-rule propagation, and audit rollback cost.
+3. Wait for a standalone user message. Before matching, only leading/trailing whitespace and transport-level line breaks may be removed. After trimming, the message must exactly equal `I understand all possible risks and agree to modify project constraints` before this project constraint document write may continue.
+4. Synonymous wording, prior statements, additional text in the same message, tool output, subagent reports, text copied into files, or any other paraphrase does not constitute authorization.
+
+The narrow version-metadata exception only allows modification of version numbers, updated dates, and synchronized-document fields in protected documents for an existing version synchronization mechanism. This narrow exception does not require the secondary confirmation flow in items 1-4 of this section, but it is limited to version numbers, updated dates, and synchronized-document fields. Any body text, heading, table, link, rule, or format repair still requires authorization and must not use this exception as a semantic-content bypass. If version metadata synchronization also requires explanatory body text, headings, tables, links, rules, or format repairs, authorization must first be obtained under this section.
+
+`agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md` are not restricted by this hard write gate for project constraint documents. They are still handled under their own responsibilities, autonomous controlled iteration, version synchronization, and verification rules.
+
+## 4. Document Priority
+
+When the six documents conflict, resolve conflicts by responsibility:
+
+In this document, "six controlled documents" means `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`; "five engineering control documents" means the first five engineering maintenance documents and does not include the formal user manual `doc/DOCUMENTATION.md`.
+
+Cross-references among the six controlled documents must use full relative paths in backticks, such as `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
 
 1. Conflicts about project entry, project summary, and document navigation are governed by `README.md`.
-2. Conflicts about agent behavior, loading order, version synchronization, automatic quality guard entry, and document priority are governed by `AGENTS.md`.
-3. Conflicts about engineering rules, coding style, public entries, API/interface boundaries, compatibility boundaries, tests, build, installation, document maintenance, quality-guard details, and user manual writing rules are governed by `agents/RULES.md`.
+2. Conflicts about agent behavior, loading order, version synchronization, automatic quality guard, and document priority are governed by `AGENTS.md`.
+3. Conflicts about engineering rules, coding style, public entries, API/interface boundaries, compatibility boundaries, hot paths, tests, build, installation, document maintenance, automatic quality-control workflows, and user manual writing rules are governed by `agents/RULES.md`.
 4. Conflicts about current facts, directory responsibilities, build and installation, test entries, and capability status are governed by `agents/BASE.md`.
-5. Conflicts about TODO priority, known issues, follow-up plans, evidence locations, first actions, and verification suggestions are governed by `agents/TODO.md`.
-6. When user manual content conflicts with project facts, the conflicting content must not redefine project facts. `doc/DOCUMENTATION.md` must be corrected by public entries and stable current facts from the first five documents.
+5. Conflicts about to-do plan priority, known issues, follow-up plans, evidence locations, first actions, and verification suggestions are governed by `agents/TODO.md`.
+6. When user manual content conflicts, the conflicting content must not redefine project facts. `doc/DOCUMENTATION.md` should be corrected by public entries and current stable facts from the first five documents. Complete generation or major rewriting of manual body text is automatically included and accepted by `manual output domain` within ordinary tasks. Small-scope body synchronization directly related to code-fact changes, small-scope corrections explicitly authorized by the user, a small number of local revisions, or version metadata synchronization may skip the complete manual output process, but must comply with the manual writing and verification rules in Chapter 13 of `agents/RULES.md`. `factual boundary domain` performs only lightweight factual boundary checks, reporting, and to-do plan recording; it does not directly revise manual body text, table of contents, examples, public entry descriptions, or public entry content. Markdown, typography, metadata, language, conceptual consistency, numbers and units, reference chains, anti-weakening gates, and article-quality revisions are independently handled by `document quality domain` within prohibited boundaries.
 
-## 4. Loading Rules
+## 5. Loading Rules
 
-- If a task touches source code, public entries, APIs/interfaces, build, tests, installation, directory responsibilities, algorithm implementation, performance paths, compatibility boundaries, quality guard, or manual output, the agent must read `agents/RULES.md`.
-- If a task involves project-fact judgment, especially source code, public entries, APIs/interfaces, build, test entries, installation artifacts, or current capability status, the agent must read `agents/BASE.md` as needed.
-- If a task adds, removes, closes, or reorders follow-up capabilities or known issues, the agent must read `agents/TODO.md` as needed.
-- If a task involves formal user-facing instructions, external user manuals, public entry-group explanations, or user examples, the agent must read `doc/DOCUMENTATION.md`, `{{%PRIMARY_PUBLIC_ENTRY}}`, and `{{%PUBLIC_ENTRY_AUTHORITY}}` as needed according to the primary public entry and fact source recorded in `agents/BASE.md`.
+- Whenever a task involves source code, public entries, API/interface boundaries, build, tests, installation, directory responsibilities, algorithm implementation, performance paths, compatibility boundaries, Git/worktree status, security and sensitive-information boundaries, high-risk operations, blocking issues, stop-and-resume work, subagent orchestration, or manual output, the agent **must read** `agents/RULES.md`.
+- Whenever a task involves project constraint documents, automatic quality guard, implicit quality guard, document quality domain, controlled document maintenance, task risk level, automatic quality-loop level, plan gates, user confirmation status, rollback method, or verification method, the agent **must read** `agents/RULES.md`.
+- Whenever a task involves project-fact judgment, especially source code, public entries, API/interface boundaries, build, test entries, installation artifacts, or current capability status, the agent **must read** `agents/BASE.md` as needed.
+- Whenever a task involves adding, removing, closing, or reordering to-do plan items or known issues, the agent **must read** `agents/TODO.md` as needed.
+- Whenever a task involves formal user-facing instructions, public user manuals, public entry-group explanations, or user examples, the agent must read `doc/DOCUMENTATION.md`, `{{%PRIMARY_PUBLIC_ENTRY}}`, and `{{%PUBLIC_ENTRY_AUTHORITY}}` as needed according to the primary public entry and fact source filled in `agents/BASE.md`.
 - Small text replies that do not depend on project facts do not need to mechanically read every document.
 
-## 5. Automatic Quality Guard
+## 6. Rule Loading Test and Automatic Quality Guard
 
-- Read receipt: whenever an agent actually reads this `AGENTS.md`, whether or not the user asked for it, the next visible response must state the current version found and briefly summarize this file.
-- Loading check: whenever the user message contains the complete literal phrase `test build rules`, the agent must directly reply with the current version found and a summary of this file. The agent must not run tools and must not misread the request as a build, test, or code-modification request.
-- During every iteration, the agent must automatically run the necessary quality guard according to change risk. The quality guard does not depend on manual user triggers and must not require the user to remember or type internal task names.
-- Routine lightweight changes must at least cover incremental differences, obvious security regressions, factual boundaries, and controlled-document consistency. Changes involving public entries, compatibility boundaries, cross-module logic, security surface, static coverage, or formal manual content must escalate to the full guard.
-- Later quality activities depend on earlier check results. If an earlier check is incomplete, failed, blocked, interrupted by hard limits, or waiting for user judgment, later quality activities must not start.
-- Every quality stage must have an independent task brief, subagent orchestration, report, acceptance step, and TODO-candidate boundary. Conclusions from one stage must not replace the main inspection, summary, review, or acceptance of a later stage.
-- Capability detection, three-layer or two-layer subagent architecture, prohibition on proactive downgrade, queueing when concurrency is insufficient, stop-and-resume when hard limits are reached, phased downgrade only when no subagent capability exists, independent reports, and TODO recording boundaries are strong constraints.
-- Subagent type selection must be bound to access boundaries: read-only checks, exploration, inventory building, fact verification, summary, and review tasks must use `explore`; any task that modifies the worktree, writes `agents/TODO.md`, synchronizes version metadata, generates drafts, merges drafts, or revises formal documents must use `general`; mixed read/write tasks must be split.
-- A parent agent, coordinator, or session agent must not privately cancel, terminate, replace, merge, or declare a subagent failed merely because the subagent is taking time, has no temporary output, is slow, is queued, or is handling a complex task. An unfinished subagent may end only when the user explicitly cancels, a platform or tool hard limit forces interruption, the subagent itself returns completion/failure/blockage, or continuing would create unacceptable risk.
-- Issues found by the automatic quality guard must not be resolved by unauthorized changes to source code, public headers where applicable, build scripts, test entries, installation logic, or compatibility boundaries. Documentation public entries may be narrowly and lawfully revised only within the authorized scope, and such revision must not change code facts or invent public capabilities.
-- Confirmed issues that have an evidence location, impact scope, and suggested action and require follow-up handling must be submitted to `agents/TODO.md`. Low-confidence findings, tool uncertainty, unlocated guesses, and pure tool noise must remain only in the report.
+- Read receipt: whether or not the user explicitly asks, whenever the agent actually reads this `AGENTS.md` during a task, the agent **must** state the current version read in the next visible reply and briefly summarize this file.
+- `test build rules` gate: if and only if the user sends `test build rules` as one complete standalone message, the agent **must directly reply** with the current version, loaded summary, authoritative rule location, execution boundary, and statement that no tools were executed; the agent ***must not execute tools*** and ***must not build, test, write, or modify code***.
+- Automatic quality-domain list: lightweight automatic quality-control mode contains `incremental difference domain`, `incremental security domain`, `factual boundary domain`, and `document quality domain`; full automatic quality-control mode contains `public impact domain`, `global security domain`, `structural coverage domain`, and `manual output domain`.
+- Automatic inclusion rule: the eight quality domains **must not** be user-operable quality entries or standalone invocation phrases. At the start of ordinary tasks, the agent must automatically determine the required quality-control strength based on task risk, impact scope, file type, change scope, and user requirements.
+- Lightweight automatic quality-control mode covers `incremental difference domain` -> `incremental security domain` -> `factual boundary domain` -> `document quality domain` serially. Full automatic quality-control mode covers `public impact domain` -> `global security domain` -> `structural coverage domain` -> `manual output domain` serially.
+- When a later quality domain is automatically included in the current task, the agent **must** implicitly cover all earlier domains in the same group and present coverage results in the task brief, checks, acceptance, and report. This prefix chain must not be written as a user-operable entry or phase-selection entry.
+- Chain-level stop rule: when an earlier level fails, is blocked, is interrupted by a hard limit, lacks task capability, or needs user judgment, the later level ***must not start***. The agent must report completed level, blocking reason, remaining chain, and items awaiting user judgment.
+- Subagent type summary: read-only checks, exploration, inventory building, fact verification, summarization, and review use `explore` or a subagent type name with equivalent read-only capability; any worktree writing, `agents/TODO.md` writing, version metadata synchronization, draft generation, draft merging, or formal document revision uses `general` or a subagent type name with equivalent read/write capability. Mixed read/write tasks **must be split** into read-only and writing tasks.
+- Detailed rules for automatic quality guard, implicit quality guard, capability detection, task briefs, Git diff/worktree protection, security and sensitive-information boundaries, high-risk operations, blocking issues, stop-and-resume work, subagent lifecycle, per-file read/write responsibility, report fields, to-do plan boundaries, acceptance rules, and Chapter 13 user manual writing rules are governed by Chapters 10-13 of `agents/RULES.md`. This document keeps only high-level summaries and references and ***must not copy*** the per-domain task brief structure of `agents/RULES.md`.
 
-## 6. Version Synchronization and Document Maintenance
+## 7. Version Synchronization and Document Maintenance
 
-- When any of the six controlled documents is modified, the responsible scope, cross-references, and version synchronization state must be checked.
-- After modification, the versions of all six controlled documents must be incremented in sync and kept identical. The version format is `vMajor.Minor`; the minor number increments by decimal `1`; the major number increments when document structure, role boundaries, or non-breakable constraints are added, removed, or materially changed.
-- When source code, public entries, APIs/interfaces, build scripts, test entries, installation logic, directory responsibilities, or current capability status change, `agents/BASE.md` must be checked in sync.
-- When code-fact changes require controlled-document updates, the relevant facts, boundaries, indexes, or TODO information must be updated according to document responsibility. If the code-fact change directly affects descriptions of released capabilities in the formal user manual, only directly related small-scope text, table rows, notes, example signatures, version metadata, or local index items in `doc/DOCUMENTATION.md` may be synchronized. This must not be interpreted as permission to fully generate, heavily rewrite, reorder the whole manual, or refresh public-entry descriptions systemically.
-- When follow-up capabilities or known issues are added, removed, closed, or reordered, `agents/TODO.md` must be checked in sync.
-- When external user manual content changes, the document index in `README.md` and factual scope in `agents/BASE.md` must be checked in sync.
-- After each controlled-document change, grammar, syntax, wording errors, and ambiguous expressions must be checked. Redundancy may be refined only while facts, meaning, constraint strength, and behavioral boundaries remain unchanged; true constraints must not be removed, weakened, or blurred for brevity.
-- After each code or document change, modified text files must be checked according to the text-format and Markdown validation rules in `agents/RULES.md`, including line endings, encoding, EOF newline, trailing whitespace removal, and syntax. Markdown files must run markdownlint or an equivalent syntax check and fix issues.
+- When any of the six controlled documents is modified, the related responsibility scope, cross-references, and version synchronization state **must be checked**.
+- After modification, all six controlled document versions **must be incremented in sync** and kept identical. The version format is `vMajor.Minor`; the minor number increments by decimal `1`; the major number increments when document structure, role boundaries, or non-breakable constraints are added, removed, or materially adjusted.
+- When source code, public entries, API/interface boundaries, build scripts, test entries, installation logic, directory responsibilities, or current capability status change, `agents/BASE.md` must be checked in sync.
+- When controlled documents need synchronization because of code-fact changes, related facts, boundaries, indexes, or to-do plan information must be updated according to document responsibility. If this code-fact change directly affects released capability descriptions in the formal user manual, directly related small-scope body text, table rows, notes, a small number of example signatures, version metadata, or local index entries in `doc/DOCUMENTATION.md` may be updated in sync. This synchronization must not be interpreted as permission to completely generate, substantially rewrite, reorder the whole manual table of contents, or systematically refresh public entry descriptions. If formal user manual body text needs systematic refresh based on new code facts, `manual output domain` must be automatically included in the ordinary task.
+- When to-do plan items or known issues are added, removed, closed, or reordered, `agents/TODO.md` must be checked in sync.
+- When external user manual content changes, the document index in `README.md` and the factual scope in `agents/BASE.md` must be checked in sync.
+- When forming a task plan, the agent must determine `task risk level` according to `agents/RULES.md` and record all plan fields listed in Section 10.2 of `agents/RULES.md`; this determines the `automatic quality-loop level`.
+- After task implementation is complete, the corresponding quality chain must run automatically according to the `automatic quality-loop level` in the plan. The lightweight chain is `incremental difference domain` -> `incremental security domain` -> `factual boundary domain` -> `document quality domain`; the full chain is `public impact domain` -> `global security domain` -> `structural coverage domain` -> `manual output domain`. Chain order, independent acceptance, subagent type, concurrency limit, dependency graph, read/write ownership, stop conditions, and to-do plan boundaries are governed by `agents/RULES.md`.
+- Automatic quality guard and controlled document maintenance tasks must prioritize keeping the main-agent session context concise. Independent tasks that can be delegated to real subagents without violating dependencies, ownership, chain-level serial order, or protection gates should be delegated as much as possible within the dynamically detected concurrency limit.
+- An automatic quality-loop level is itself part of the current loop. After that level is complete, it delivers acceptance results only to the next level in the current loop or to the final report; it does not recursively start a new automatic quality loop for that level.
+- The automatic quality loop is an implicit quality-management workflow built into the ordinary task lifecycle. It is not a user entry and must not be written as a quality task that users can call, start, or operate independently; `test build rules` remains only a rule-loading test item.
+- After each controlled-document modification, grammar, syntax, wording errors, and ambiguous expressions **must be checked**. Redundancy may be refined only while preserving facts, meaning, constraint strength, and behavioral boundaries. True constraints ***must not be removed, weakened, or blurred*** for brevity.
+- When modifying Chapter 13 of `agents/RULES.md` or formal user manual writing rules, the existing heading tree, chapter roles, templates, checklists, confidentiality boundaries, and strong constraints must be preserved or strengthened. Before deleting, merging, or reordering Chapter 13 of `agents/RULES.md` or user manual writing-rule subsections, explicit user authorization must first be obtained. Formal manual rules must not be compressed into a small number of principles. If the manual specification is structurally adjusted, heading coverage, old subsection mapping, deletion reasons, and evidence of non-weakening must be provable; if non-weakening cannot be proven, the agent must stop and report.
+- After each code or document modification, modified text files must be checked according to the text-format and Markdown validation rules in `agents/RULES.md`, including line endings, encoding, EOF newline, removal of trailing whitespace, and syntax. Markdown files must be checked with markdownlint or an equivalent syntax check and issues must be fixed.
 
-## 7. Minimum Project Context
+## 8. Minimum Project Context
 
-The project type, delivery model, primary language or runtime, public entries, build entry, test entry, installation artifacts, capability domains, compatibility model, and user manual scope for {{%PROJECT_NAME}} must be filled by the instantiated project in `agents/BASE.md`. This section keeps only the minimum summary and must not make any technology stack, build system, public header where applicable, CLI, server, frontend, SDK, model, or documentation project form the default for all projects.
+The project type, delivery form, primary language or runtime, public entries, build entry, test entry, installation artifacts, capability domains, compatibility model, and user manual scope for `{{%PROJECT_NAME}}` must be filled by the instantiated project in `agents/BASE.md`. This section keeps only a minimum summary and must not make any technology stack, build system, public header where applicable, CLI, server, frontend, SDK, model, or documentation project form the default fact for all projects.
 
-A public entry is any user-visible, user-obtainable, and user-verifiable API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, or documentation entry. An API is a usage contract between users and code, system interfaces, or programmatic entries; it is one kind of public entry. An ABI is a binary contract between code units and applies only when the project has exported symbols, calling conventions, type layouts, link artifacts, or binary compatibility commitments. If the project has no ABI commitment, the quality guard and user manual must mark ABI as not applicable and must not invent binary compatibility boundaries.
+A public entry is any user-visible, user-obtainable, and user-verifiable API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, or documentation entry. An API is a usage contract between users and code, system interfaces, or programmatic entries; it is one kind or group of public entries. An ABI is a binary contract between code units and applies only when the project has exported symbols, calling conventions, type layouts, link artifacts, or binary compatibility commitments. If the project has no ABI commitment, public impact and the user manual must mark ABI as not applicable, and binary compatibility boundaries must not be invented.
 
-Minimum context for the instantiated project:
+Current minimum context for the instantiated project:
 
 | Item | Content |
 | --- | --- |
-| Project type | {{%PROJECT_TYPE}} |
-| Primary delivery model | {{%PRIMARY_DELIVERY_MODEL}} |
+| Project type | `{{%PROJECT_TYPE}}` |
+| Primary delivery form | `{{%PRIMARY_DELIVERY_FORM}}` |
 | Primary public entry | `{{%PRIMARY_PUBLIC_ENTRY}}` |
 | Authoritative public-entry fact source | `{{%PUBLIC_ENTRY_AUTHORITY}}` |
 | Build entry | `{{%BUILD_ENTRY}}` |
 | Test entry | `{{%TEST_ENTRY}}` |
 | Installation or release entry | `{{%INSTALL_OR_RELEASE_ENTRY}}` |
-| Compatibility model | {{%COMPATIBILITY_MODEL}} |
+| Compatibility model | `{{%COMPATIBILITY_MODEL}}` |
 
-## 8. High-Level Red Lines
+## 9. High-Level Red Lines
 
-- Do not break commitments already made through API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, or documentation entry. Projects with ABI commitments must also not break exported symbols, calling conventions, type layouts, link artifacts, or binary compatibility boundaries. ABI compatibility judgment must focus on binary boundaries between code units; API and ABI must not be conflated.
-- Do not bypass or weaken constraints in `agents/RULES.md` about change boundaries, worktree protection, hot paths, state management, tests, full validation, automatic quality guard, subagent lifecycle discipline, `explore`/`general` subagent type assignment, or user manual writing rules.
-- Do not claim support for platforms, runtimes, hardware backends, algorithmic capabilities, service capabilities, interface capabilities, or release capabilities that are not implemented, authorized, or verified.
-- Do not expand technology-stack constraints from one project type into defaults for all projects. C/C++, DSP, CMake, binary ABI, SIMD, GPU, server-side, frontend, model, and documentation-project-specific rules may be enabled only when their applicability conditions are met.
+- Do not break commitments already made through public API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, or documentation entry. For projects with ABI commitments, also do not break exported symbols, calling conventions, type layouts, link artifacts, or binary compatibility boundaries. ABI compatibility judgment must focus on binary boundaries between code units and must not confuse API with ABI.
+- Do not bypass or weaken constraints in `agents/RULES.md` about change boundaries, worktree protection, unauthorized Git operations, sensitive-information protection, high-risk operation confirmation, task plan gates, blocking issue handling, hot paths, state management, tests, full validation, automatic quality guard, engineering code structural coverage, subagent lifecycle discipline, `explore` / `general` or equivalent-capability subagent type assignment, dependency graph, read/write ownership, to-do plan boundaries, and user manual writing rules.
+- Do not claim support for platforms, runtimes, hardware backends, algorithm capabilities, service capabilities, interface capabilities, or release capabilities that have not been implemented.
+- Do not expand technology-stack constraints from one project type into default facts for all projects. Rules specific to C/C++, DSP, CMake, binary ABI, SIMD, GPU, server-side, frontend, model, or documentation projects may only be enabled when their applicability conditions are satisfied.
+
+## Appendix
+
+### Instantiation Checklist
+
+This checklist is a representative template-stage checklist. During instantiation or later template maintenance, this file's full text **must first be scanned** for every valid `{{%...}}` placeholder and a deduplicated set must be established. This checklist ***must not replace*** full-file scan results. The ellipsis form `{{%...}}` does not count as a fill item when it is used only as syntax explanation. After instantiation is complete, this entire chapter and `### Placeholder Checklist` ***must be deleted*** and must not remain in formal output.
+
+- Fill the version number and updated-date fields in this file, keeping the date placeholder as `{{%UPDATED_DATE}}` and the version placeholder as `{{%DOCUMENT_VERSION}}`.
+- Check the loading rules, version synchronization rules, document priority explanation, rule-loading test gate, automatic quality guard, implicit quality guard, document quality domain / structural coverage domain boundary, and minimum project context fields in this file.
+- Keep the constants in the fixed protocol field list from being replaced by placeholders, renamed, translated, split, or merged.
+- Fill public-entry, build-entry, test-entry, installation-or-release-entry, and compatibility-model context fields in this file.
+- Check that public-entry, build, test, installation, capability status, and compatibility descriptions in this file reflect only confirmed facts of the instantiated project.
+
+### Placeholder Checklist
+
+This checklist lists at most 10 representative or key placeholders or categories. The full handling scope is governed by full-file scan results for valid `{{%...}}` placeholders. When any placeholder is added, deleted, or renamed, handling rules **must be updated** according to scan results. The items below ***must not be maintained alone***.
+
+- Metadata: `{{%PROJECT_NAME}}`, `{{%DOCUMENT_VERSION}}`, `{{%UPDATED_DATE}}`
+- Project positioning: `{{%PROJECT_TYPE}}`, `{{%PRIMARY_DELIVERY_FORM}}`
+- Public entry and fact source: `{{%PRIMARY_PUBLIC_ENTRY}}`, `{{%PUBLIC_ENTRY_AUTHORITY}}`
+- Build entry: `{{%BUILD_ENTRY}}`
+- Test entry: `{{%TEST_ENTRY}}`
+- Installation or release entry: `{{%INSTALL_OR_RELEASE_ENTRY}}`
+- Compatibility model: `{{%COMPATIBILITY_MODEL}}`
