@@ -1,4 +1,4 @@
-# `{{%PRODUCT_NAME}}` User Manual
+﻿# `{{%PRODUCT_NAME}}` User Manual
 
 Document version: `{{%DOCUMENT_VERSION}}`
 
@@ -11,7 +11,7 @@ Document status: `{{%DOCUMENT_STATUS}}`
 This document is written for end users, integration developers, and operations users. It describes released capabilities and public preview capabilities whose status is explicitly marked.
 This document keeps only public facts that users can obtain, verify, and execute.
 Public entries include API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment, operations, and documentation entry. Actual applicability is governed by released public materials, the applicable version, and public-entry facts; the public-entry chapter matrix in this manual only summarizes and navigates those facts.
-This document does not commit to unpublished capabilities, internal processes, or content whose applicability is not marked.
+This document **does not commit** to unpublished capabilities, internal processes, or content whose applicability is not marked.
 Features, entries, configurations, examples, and limitations in the body text may be used as user basis only when their owning version and public entry are applicable.
 Applicability for all public-entry chapters comes from confirmed public facts and is summarized in the public-entry chapter matrix. An entry marked not applicable only means the current product does not provide a user-reliable usage commitment for that entry.
 
@@ -19,7 +19,7 @@ Applicability for all public-entry chapters comes from confirmed public facts an
 
 This table of contents helps end users, integration developers, and operations users locate applicable content by public entry.
 Core required chapters cover version, boundary, acquisition, quick start, support, and index appendices. Public-entry-related chapters are determined by confirmed public facts and navigated through the public-entry chapter matrix.
-Entries that are not marked applicable by confirmed public facts and are not summarized in the public-entry chapter matrix are not commitments of the current user manual and are not a user-reliable basis for usage, integration, operations, or troubleshooting.
+Entries that are not marked applicable by confirmed public facts and are not summarized in the public-entry chapter matrix **are not commitments of the current user manual** and are not a user-reliable basis for usage, integration, operations, or troubleshooting.
 Availability of API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment, operations, and documentation entry is governed by the public matrix and corresponding chapters.
 
 - [1. Version Information and Reading Path](#1-version-information-and-reading-path)
@@ -194,12 +194,12 @@ This path answers "how do I run, upgrade, roll back, and troubleshoot stably?"
 
 #### 1.4.1 Released Capabilities
 
-Describe only features, entries, commands, configuration, and constraints within `{{%RELEASED_CAPABILITY_SCOPE}}`.
-Public preview capabilities must explicitly mark status, limits, and compatibility commitments.
+**Describe only** features, entries, commands, configuration, and constraints within `{{%RELEASED_CAPABILITY_SCOPE}}`.
+Public preview capabilities **must explicitly mark** status, limits, and compatibility commitments.
 
 #### 1.4.2 Non-Public Content
 
-This manual does not include unpublished entries, uncommitted behavior, unverifiable capabilities, or implementation details.
+***This manual does not include unpublished entries, uncommitted behavior, unverifiable capabilities, or implementation details.***
 Examples show only user-obtainable calls, commands, configuration, UI operations, or deployment methods.
 
 ### 1.5 Document Conventions
@@ -287,9 +287,9 @@ This chapter explains the concepts users need to understand when reading later p
 ### 3.1 Public-Entry Chapter Matrix
 
 This section summarizes and navigates the applicability of public entries in confirmed public facts.
-Entries marked applicable define user-reliable public-entry boundaries; readers only need to read the entry chapters marked applicable in the matrix.
-This manual covers only entries marked applicable in the matrix; the table of contents, body text, examples, indexes, and troubleshooting items are all governed by these applicable entries.
-Entries marked not applicable are not user-reliable content. They do not provide complete reference chapters, examples, indexes, or troubleshooting items, and their non-applicability reason is stated only in the matrix.
+Entries marked applicable **define user-reliable public-entry boundaries**; readers only need to read the entry chapters marked applicable in the matrix.
+This manual **covers only entries marked applicable in the matrix**; the table of contents, body text, examples, indexes, and troubleshooting items are all governed by these applicable entries.
+Entries marked not applicable are **not user-reliable content**. They do not provide complete reference chapters, examples, indexes, or troubleshooting items, and their non-applicability reason is stated only in the matrix.
 
 #### 3.1.1 Entry Applicability Matrix
 
@@ -417,7 +417,7 @@ Entries that are not provided are marked only with non-applicability reasons in 
 {{%RELEASE_PACKAGE_STRUCTURE_EXAMPLE}}
 ```
 
-The release package structure lists only user-visible directories or files and their responsibilities. It does not describe implementation processes that are not visible to users.
+The release package structure lists only user-visible directories or files and their responsibilities. It **does not describe implementation processes that are not visible to users**.
 
 ### 4.5 Version Changes and Removal
 
@@ -685,9 +685,9 @@ The deprecation policy lists deprecation markers, replacements, transition perio
 
 ### 8.4 Non-Public and Uncommitted Items
 
-- Unpublished entries are not usable capabilities.
-- Roadmap items not marked as public preview are not compatibility commitments.
-- Internal implementation, internal diagnostics, private configuration, unpublished tools, and unreleased interfaces are not user-dependable interfaces.
+- ***Unpublished entries are not usable capabilities.***
+- **Roadmap items not marked as public preview are not compatibility commitments.**
+- ***Internal implementation, internal diagnostics, private configuration, unpublished tools, and unreleased interfaces are not user-dependable interfaces.***
 
 ### 8.5 Migration Guide
 
@@ -805,5 +805,5 @@ List user-accessible public materials, standards, protocols, product pages, or e
 - Acquisition, runtime preparation, authentication, access control, network, configuration, and dependent service preparation have been completed for the applicable public entry.
 - At least one minimal example for an applicable public entry has been run, and the verifiable result has been saved.
 - The limits, error codes, diagnostic information, and support entry for the truly applicable entry are understood.
-- No unpublished entry, internal implementation detail, or uncommitted behavior is being relied upon.
-- Only confirmed public facts and public capabilities in entries and corresponding chapters marked applicable by the public-entry chapter matrix are being used.
+- **No unpublished entry, internal implementation detail, or uncommitted behavior is being relied upon.**
+- Only **confirmed public facts and public capabilities** in entries and corresponding chapters marked applicable by the public-entry chapter matrix are being used.

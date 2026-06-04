@@ -1,4 +1,4 @@
-# `{{%PROJECT_NAME}}` Project Guide
+﻿# `{{%PROJECT_NAME}}` Project Guide
 
 ## 1. Version Information
 
@@ -27,7 +27,7 @@ A public entry is any user-visible, user-obtainable, and user-verifiable API, CL
 ## 4. Capability Boundary Summary
 
 - Current project facts, directory responsibilities, build and installation status, test entries, and capability status are governed by `agents/BASE.md`.
-- Released capabilities, preview capabilities, internal capabilities, placeholder capabilities, and uncommitted capabilities must be filled separately; unfinished, skeletal, internal-only, or unpublished capabilities must not be described as released capabilities.
+- Released capabilities, preview capabilities, internal capabilities, placeholder capabilities, and uncommitted capabilities must be filled separately; ***unfinished, skeletal, internal-only, or unpublished capabilities must not be described as released capabilities***.
 - Public entries may be API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, documentation entry, or other user-visible entries; the instantiated project must fill them according to the real delivery form.
 - User-facing usage instructions are governed by `doc/DOCUMENTATION.md`; if they conflict with public entries, current facts, or the first five engineering control documents, revise the manual instead of using the manual to redefine project facts.
 - Automatic quality domains, gates, and workflows for complete generation or major rewrites of the formal user manual are governed by `AGENTS.md` and `agents/RULES.md`.
@@ -50,7 +50,7 @@ Entries that do not exist in the instantiated project must be explicitly marked 
 | Priority | Document | Core function | Progression |
 | --- | --- | --- | --- |
 | 1 | `README.md` | Project entry, project summary, capability boundary summary, usage entries, document navigation | Highest-level entry document; answers "what is this project, and where should I start?" |
-| 2 | `AGENTS.md` | Agent control entry, loading order, automatic quality guard, hard write gate for project constraint documents, version synchronization, document priority, minimum context | Based on the navigation in `README.md`, defines how agents read, execute, synchronize, and maintain the project. |
+| 2 | `AGENTS.md` | Agent control entry, loading order, automatic quality guard, implicit quality guard, hard write gate for project constraint documents, version synchronization, document priority, minimum context | Based on the navigation in `README.md`, defines how agents read, execute, synchronize, and maintain the project. |
 | 3 | `agents/RULES.md` | Detailed engineering rules, coding style, public-entry and compatibility constraints, tests, build, installation, document maintenance, automatic quality guard, implicit quality guard, document quality domain, and user manual writing rules | Expands the high-level red lines in `AGENTS.md` into executable engineering rules and answers "what must be followed when changing code or documents, running built-in quality control, or generating manuals?" |
 | 4 | `agents/BASE.md` | Current factual baseline, directory responsibilities, public-entry facts, compatibility boundary facts, build and installation facts, test-entry facts, and current capability status | Records "what the project actually is now" under `agents/RULES.md` constraints. |
 | 5 | `agents/TODO.md` | Follow-up implementation plans, known issues, priorities, evidence locations, first actions, verification suggestions | Derives "what should be added next, what should be done first, and which known issues need handling" from current facts in `agents/BASE.md` and verified findings. |
@@ -75,6 +75,7 @@ Automatic quality guard navigation:
 | --- | --- | --- | --- |
 | Lightweight automatic quality-control mode | `incremental difference domain`, `incremental security domain`, `factual boundary domain`, `document quality domain` | Automatically included when ordinary task risk is lower or the impact scope is clear. This file does not expand per-domain task briefs. | `AGENTS.md`; `agents/RULES.md` |
 | Full automatic quality-control mode | `public impact domain`, `global security domain`, `structural coverage domain`, `manual output domain` | Automatically included when ordinary task risk is higher, impact scope is broader, or pre-freeze review is required. This file only provides navigation. | `AGENTS.md`; `agents/RULES.md` |
+| Complex task planning discipline | underlying fact derivation, blocker clarification, plan readiness, and acceptance tie-back | Complex ordinary tasks first clarify key facts, constraints, and blockers, then form an executable plan. This file does not expand the internal state machine, quality-domain chains, or subagent task briefs. | `AGENTS.md`; `agents/RULES.md` |
 
 ## 7. Suitable Use Cases
 

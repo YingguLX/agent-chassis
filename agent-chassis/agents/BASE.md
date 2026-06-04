@@ -1,4 +1,4 @@
-# `{{%PROJECT_NAME}}` Development Baseline
+﻿# `{{%PROJECT_NAME}}` Development Baseline
 
 ## 1. Version Information
 
@@ -15,14 +15,15 @@ This file does not carry agent control rules, detailed engineering rules, automa
 
 When source code, public entries, API/interface boundaries, build scripts, test entries, installation logic, directory responsibilities, or current capability status change as facts, this file **records only the current facts within this file's responsibility**. Cross-document version synchronization, automatic quality guard, and user manual output processes are maintained by `AGENTS.md` and `agents/RULES.md`. Confirmed factual gaps and known issues are carried by `agents/TODO.md`.
 
-Current controlled-rule facts are: Chapter 10 of `agents/RULES.md` maintains build and installation, document maintenance, automatic quality guard, task risk level, automatic quality-loop level, text-format validation, and verification boundaries; Chapter 11 maintains lightweight automatic quality-control rules; Chapter 12 maintains full automatic quality-control rules; Chapter 13 maintains formal user manual writing rules, templates, confidentiality boundaries, and checklists. The complete list of fixed protocol constants, automatic quality guard summary, and execution details are defined in `AGENTS.md` / `agents/RULES.md`; this file only references the existence and ownership of these rules and ***does not copy*** their executable protocols.
+Current controlled-rule facts are: Chapter 10 of `agents/RULES.md` maintains build and installation, document maintenance, automatic quality guard, underlying fact derivation, task risk level, automatic quality-loop level, text-format validation, and verification boundaries; Chapter 11 maintains lightweight automatic quality-control rules; Chapter 12 maintains full automatic quality-control rules; Chapter 13 maintains formal user manual writing rules, templates, confidentiality boundaries, and checklists. The complete list of fixed protocol constants, automatic quality guard summary, and execution details are defined in `AGENTS.md` / `agents/RULES.md`; this file only references the existence and ownership of these rules and ***does not copy*** their executable protocols.
 
 ## 3. Automatic Quality-Guard Rule Ownership
 
 The automatic quality guard, as a controlled-rule fact, belongs to `AGENTS.md` and `agents/RULES.md`. This file only records its factual baseline relationship and ***must not copy*** per-quality-domain task briefs, subagent lifecycles, or formal manual output details.
 
 - Automatic quality-domain chain: The quality-domain lists, serial order, and execution details of the lightweight/full automatic quality-control groups are governed by `AGENTS.md` and `agents/RULES.md`; this file records only rule ownership and factual maintenance relationships.
-- Automatic quality loop: Task risk levels, automatic quality-loop levels, plan fields, chain-level stops, acceptance outputs, and to-do plan recording criteria are governed by `AGENTS.md` and `agents/RULES.md`; this file records only rule ownership and does not copy the judgment matrix or execution protocol.
+- Underlying fact derivation: Fact/assumption/experience-based solution/preference distinction, blocker handling, plan-readiness gates, and acceptance tie-back for complex ordinary tasks are governed by `AGENTS.md` and `agents/RULES.md`; this file records only capability ownership and does not copy the state machine or execution protocol.
+- Automatic quality loop: task risk levels, automatic quality-loop level, plan fields, chain-level stops, acceptance outputs, and to-do plan recording criteria are governed by `AGENTS.md` and `agents/RULES.md`; this file records only rule ownership and does not copy the judgment matrix or execution protocol.
 - Factual maintenance relationship: When the automatic quality-domain chain, quality-domain orchestration rules, automatic quality-loop rules, `explore` / `general` or equivalent capability type ownership, task dependency graph, read/write ownership, to-do plan thresholds, or formal user manual output boundaries change as facts, this file only records rule ownership and current factual impact. Detailed execution authority remains in the automatic quality guard chapter of `AGENTS.md` and Chapters 10-13 of `agents/RULES.md`.
 
 ## 4. Project Positioning
@@ -46,7 +47,7 @@ A public entry is any user-visible, user-obtainable, and user-verifiable API, CL
 ## 5. Public Entry and Compatibility Facts
 
 Public-entry facts are filled by the instantiated project. Public entries may be API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, or documentation entry. Nonexistent entries **must be marked** `not applicable`.
-API, ABI, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, documentation entry, public header where applicable, public schema, protocol document, configuration description, binary library, test menu, and build script must all be filled according to real project facts. When not applicable, write `not applicable`; ***do not write any one project form as a universal default fact***.
+API, ABI, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, documentation entry, public header where applicable, public schema, protocol document, configuration description, binary library, test menu, and build script **must all be filled according to real project facts**. When not applicable, write `not applicable`; ***do not write any one project form as a universal default fact***.
 
 | Public entry category | Entry location or identifier | Stability level | User responsibility | Project responsibility | Notes |
 | --- | --- | --- | --- | --- | --- |
@@ -100,7 +101,7 @@ When only the six controlled documents, user documentation, or templated documen
 | --- | --- | --- | --- | --- |
 | `{{%TEST_OR_VERIFICATION_CATEGORY}}` | `{{%TEST_ENTRY}}` | `{{%TEST_COVERAGE_SCOPE}}` | `{{%AUTOMATION_STATUS}}` | `{{%NOTES}}` |
 
-Test facts must distinguish automated tests, manual verification, interactive verification, performance observation, global security domain, structural coverage domain, document quality domain, pre-release checks, and user acceptance. Performance prints, sample output, menu interaction, screenshots, logs, or temporary persisted results cannot replace correctness criteria unless the instantiated project explicitly defines them as verification entries and states their limitations.
+Test facts must distinguish automated tests, manual verification, interactive verification, performance observation, security verification, structural coverage, document quality, pre-release checks, and user acceptance. Performance prints, sample output, menu interaction, screenshots, logs, or temporary persisted results cannot replace correctness criteria unless the instantiated project explicitly defines them as verification entries and states their limitations.
 
 When there is currently no entry for a type of test, write `not applicable` or `not established`. Only when that test entry is a verification capability the project should have but has not established should a follow-up plan be recorded in `agents/TODO.md` according to evidence. Do not write unestablished test entries as covered.
 
@@ -121,9 +122,10 @@ The following fact changes should trigger a synchronized check of this file:
 - Changes to API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, documentation entry, foundational types, public structures, export macros, calling conventions, or other public commitments.
 - Changes to build entries, build systems, release processes, installation artifacts, resource generation, script behavior, container images, deployment methods, or package management information.
 - Changes to responsibilities of public directories, source directories, runtime entries, test entries, build entries, document directories, installation artifact directories, generated directories, cache directories, or tool configuration directories.
-- Changes to test entries, automation status, verification methods, performance observation, structural coverage domain, global security domain, document quality domain, or result persistence conventions.
+- Changes to test entries, automation status, verification methods, performance observation, security verification, structural coverage, document quality, or result persistence conventions.
 - Changes to current capability status, such as completion of placeholder capabilities, public release of internal capabilities, completion of test entries, narrowing of release scope, or closure of known issues.
 - Changes to responsibility relationships among the six controlled documents, version synchronization rules, automatic quality-domain chain, quality-domain orchestration rules, automatic quality-loop rules, formal user manual maintenance boundaries, table-of-contents evolution rules, source-reading constraints, or confidentiality boundaries.
+- Changes to rule ownership for underlying fact derivation, blocker handling, plan-readiness gates, explicit-assumption recording, or complex ordinary-task acceptance tie-back.
 - Changes to document synchronization boundaries after code-fact changes, especially the distinction between small-scope fact synchronization in `agents/BASE.md` and triggering formal user manual generation/rewrite.
 
 ## Appendix

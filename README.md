@@ -1,4 +1,4 @@
-# Agent Chassis
+﻿# Agent Chassis
 
 > **Not a prompt. A constraint skeleton.** 🏗️
 
@@ -58,7 +58,7 @@ This root homepage is outside that skeleton. It explains the template as a publi
 
 Quality control is embedded into ordinary work. Users do not manually operate checklists, command stages, or phase selectors. The agent selects lightweight or full coverage from task risk and impact scope, then reports the quality result as part of the normal task outcome.
 
-The lightweight chain covers the `incremental difference domain`, `incremental security domain`, `factual boundary domain`, and `document quality domain`. The full chain covers the `public impact domain`, `global security domain`, `structural coverage domain`, and `manual output domain`. When a later domain is needed, earlier domains in the same chain are implicitly covered too.
+Lightweight and full coverage modes are selected internally based on task risk and impact, with earlier checks implicitly covered when deeper checks are required.
 
 ### Public Entries, API, and ABI
 
@@ -86,14 +86,11 @@ Agent Chassis treats a public entry as any user-visible, user-obtainable, and us
 
 # 2. Open BOOTSTRAP.md and paste its text into your AI agent chat.
 
-# 3. Review the parameter confirmation report.
-#    Confirm project_root, template_root, output_map, version, date,
-#    fact sources, import policy, and text format policy.
+# 3. Review the generated instantiation plan.
+#    Confirm the target project facts and output paths, then approve execution.
 
-# 4. Confirm execution only after the parameters are correct.
-
-# 5. After instantiation, point your agent at AGENTS.md.
-codex --instructions AGENTS.md
+# 4. After instantiation, configure your AI coding tool
+#    to load AGENTS.md as the project instruction entry.
 ```
 
 ---
@@ -103,7 +100,7 @@ codex --instructions AGENTS.md
 - **Constraints over suggestions.** "Must" stays "must." 🔒
 - **Isolation over mixing.** Six documents, six jobs. 📦
 - **Automatic quality over manual ceremony.** The guard runs inside ordinary work. ⛓️
-- **Placeholders over fabrication.** `{{%...%}}` means "fill from evidence," not "make something up." 🎯
+- **Placeholders over fabrication.** `{{%...}}` means "fill from evidence," not "make something up." 🎯
 - **Public facts over private assumptions.** User-visible entries, API/ABI boundaries, and manual content must trace to evidence. 🧭
 
 ---

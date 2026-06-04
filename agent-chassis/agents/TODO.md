@@ -1,4 +1,4 @@
-# `{{%PROJECT_NAME}}` To-Do Plan
+﻿# `{{%PROJECT_NAME}}` To-Do Plan
 
 ## 1. Version Information
 
@@ -24,6 +24,8 @@ This file does not carry agent control rules, detailed engineering specification
 
 Issue recording rules: a to-do plan may come from the automatic quality loop, build/test verification, document quality domain, and user feedback. Concrete automatic inclusion rules, chain-level order, permission boundaries, subagent orchestration, dependency graph, read/write ownership, and acceptance rules are governed by `AGENTS.md` / `agents/RULES.md`; this document ***must not copy*** the detailed quality-chain execution protocol. To-do plan records keep only `ID`, `Priority`, task risk level, automatic quality-loop level, source quality domain, prerequisite domain status, acceptance status, risk dimension, issue description, evidence location, impact scope, current exposure, first action, verification suggestion, and status. Chain levels that have not started, failed, are blocked, or await decision ***must not fabricate*** results. Unverified guesses, tool false positives, complete per-work-unit logs, low-confidence hints, and generic risk hints should not be mechanically written.
 
+When a complex ordinary task produces to-do plan candidates, the recording scope must trace confirmed facts, explicit assumptions, uncleared blockers, user adjudication items, candidate approaches, acceptance items, and recovery entries. This information may only supplement evidence for issue description, first action, verification suggestion, or status scope, and ***must not*** copy the underlying fact derivation protocol from `agents/RULES.md` into the to-do plan body.
+
 When the same issue is found from multiple sources, sources should be deduplicated and merged instead of registering duplicate records. When later levels have not started because an earlier level failed, was blocked, was interrupted by a hard limit, or required user judgment, only issues confirmed by completed levels may be recorded; findings or acceptance results for unstarted levels must not be fabricated.
 
 Every confirmed to-do plan item **must have** `ID`, `Priority`, task risk level, automatic quality-loop level, source quality domain, prerequisite domain status, acceptance status, risk dimension, issue description, evidence location, impact scope, current exposure, first action, verification suggestion, and status. Issues that are incomplete, unverified, or not located ***must not be written as completed***.
@@ -32,7 +34,7 @@ Before closing, downgrading, merging, or deleting a to-do plan item, the corresp
 
 ## 4. To-Do Plan Summary Table
 
-| Priority | Task risk level | Automatic quality-loop level | Risk dimension | Issue domain/module/item | File + line number | To-do plan summary | Impact scope | Current exposure |
+| Priority | task risk level | automatic quality-loop level | Risk dimension | Issue domain/module/item | File + line number | To-do plan summary | Impact scope | Current exposure |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `{{%TO_DO_PRIORITY}}` | `{{%TASK_RISK_LEVEL}}` | `{{%AUTOMATIC_QUALITY_LOOP_LEVEL}}` | `{{%RISK_DIMENSION}}` | `{{%CAPABILITY_OR_PROBLEM_DOMAIN}}` | `{{%EVIDENCE_LOCATION}}` | `{{%TO_DO_SUMMARY}}` | `{{%IMPACT_SCOPE}}` | `{{%CURRENT_EXPOSURE}}` |
 
@@ -86,13 +88,13 @@ Concrete P3 items are registered according to the section 10 item format. Before
 New user feedback, automatic quality-loop findings, build verification findings, test verification findings, or document quality domain issues should be registered according to section 4 and sections 6 through 9. Low-confidence hints, tool noise, unlocated guesses, and pure suggestions that do not meet the to-do plan writing threshold remain only in the corresponding report and are not mechanically written here.
 This section is the unified record template for all concrete to-do plan items; P0/P1/P2/P3 sections must not each predefine named placeholder issues.
 
-| ID | Priority | Task risk level | Automatic quality-loop level | Source quality domain | Prerequisite domain status | Acceptance status | Risk dimension | Issue description | Evidence location | Impact scope | Current exposure | First action | Verification suggestion | Status |
+| ID | Priority | task risk level | automatic quality-loop level | Source quality domain | Prerequisite domain status | Acceptance status | Risk dimension | Issue description | Evidence location | Impact scope | Current exposure | First action | Verification suggestion | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `{{%TO_DO_ID}}` | `{{%TO_DO_PRIORITY}}` | `{{%TASK_RISK_LEVEL}}` | `{{%AUTOMATIC_QUALITY_LOOP_LEVEL}}` | `{{%SOURCE_QUALITY_DOMAIN}}` | `{{%PREREQUISITE_DOMAIN_STATUS}}` | `{{%ACCEPTANCE_STATUS}}` | `{{%RISK_DIMENSION}}` | `{{%ISSUE_DESCRIPTION}}` | `{{%EVIDENCE_LOCATION}}` | `{{%IMPACT_SCOPE}}` | `{{%CURRENT_EXPOSURE}}` | `{{%FIRST_ACTION}}` | `{{%VERIFICATION_SUGGESTION}}` | `{{%STATUS}}` |
 
 During formal instantiation, if there are no confirmed items, the placeholder row above must be deleted and only the `No confirmed items` statement retained. Only confirmed issues with `ID`, `Priority`, task risk level, automatic quality-loop level, source quality domain, prerequisite domain status, acceptance status, risk dimension, issue description, evidence location, impact scope, current exposure, first action, verification suggestion, and status may be instantiated as records.
 
-Priority indicates handling order and release-blocking severity. Task risk level indicates the potential impact of the issue or finding on engineering facts, public entries, constraint documents, build tests, compatibility, security, user commitments, or release freeze. The two may be the same but must not be conflated. Automatic quality-loop level records whether the discovering task plan required lightweight automatic quality-control mode, full automatic quality-control mode, not applicable, or blocked status. Risk dimension records primary risk sources such as security, compatibility, public entry, build/test, document fact, user commitment, automatic quality guard, protected three documents, or template instantiation. Source quality domain compresses the source and must trace to an automatic quality-loop level, quality domain, report location, or evidence location. Prerequisite domain status and acceptance status must retain true states such as blocked, not started, failed, accepted, or awaiting decision and must not be written as completed facts.
+Priority indicates handling order and release-blocking severity. task risk level indicates the potential impact of the issue or finding on engineering facts, public entries, constraint documents, build tests, compatibility, security, user commitments, or release freeze. The two may be the same but must not be conflated. automatic quality-loop level records whether the discovering task plan required lightweight automatic quality-control mode, full automatic quality-control mode, not applicable, or blocked status. Risk dimension records primary risk sources such as security, compatibility, public entry, build/test, document fact, user commitment, automatic quality guard, protected three documents, or template instantiation. Source quality domain compresses the source and must trace to an automatic quality-loop level, quality domain, report location, or evidence location. Prerequisite domain status and acceptance status must retain true states such as blocked, not started, failed, accepted, or awaiting decision and must not be written as completed facts.
 
 ## 11. Items Not Classified as Unimplemented
 
@@ -117,6 +119,7 @@ This section only explains the field scope for to-do plan items and is not an in
 - Source evidence: records traceable locations in real files, public entries, verification results, user feedback, or quality check reports.
 - Priority changes: records the reason for the change and related document impact.
 - P3 record scope: P3 items are also recorded using the complete fields in section 10; they especially prioritize evidence location, impact scope, current exposure, task risk level, automatic quality-loop level, source quality domain, prerequisite domain status, acceptance status, risk dimension, and first action. When stable external exposure is needed, public entry, compatibility assessment, test entry, and document synchronization are also recorded.
+- Complex ordinary-task record scope: confirmed facts, explicit assumptions, blockers, user adjudication items, candidate approaches, acceptance items, and recovery entries must be traceable to the task report or evidence location and must not be written as evidence-free governance conclusions.
 - Performance-related issues: distinguish correctness verification from performance observation.
 - Completed process content: moves to `agents/BASE.md` when it becomes stable fact.
 - Capability status boundary: the to-do plan is not a released capability, current fact, or user commitment.
