@@ -1,108 +1,173 @@
 ﻿# Agent Chassis
 
-> **Not a prompt. A constraint skeleton.** 🏗️
+> **Not a prompt. A controlled-document framework for AI-assisted engineering.** 🏗️
 
-Agent Chassis is a context and constraint engineering template for AI-assisted development. It replaces the chaotic "single giant system prompt" approach with six controlled project documents: each document has isolated responsibility, synchronized versioning, clear conflict priority, public fact boundaries, and an automatic quality guard that runs inside ordinary work.
+Agent Chassis is a context and constraint engineering template for projects maintained with AI coding agents. It replaces a single oversized instruction prompt with one startup file and six controlled documents that separate project entry, agent execution rules, engineering rules, factual baseline, follow-up implementation planning, and formal user documentation.
 
-This repository root `README.md` is the public GitHub homepage for Agent Chassis. The `README.md` created inside an instantiated target project is different: it is one of the six controlled documents and participates in that project's six-document synchronization.
-
----
-
-## Why You Need This 🤔
-
-Modern AI coding tools often rely on one oversized instruction blob. That creates predictable failure modes:
-
-- **🗑️ Bloated & Chaotic** — Engineering rules, project facts, to-do plans, and user docs get mixed together.
-- **📉 Weakened Over Time** — Strong constraints quietly degrade from "must" to "should" during maintenance.
-- **🌊 Context Drift** — Agents read and write without clear ownership, and completed work disappears after context refresh.
-- **🎯 Misapplied Templates** — Rules for one stack get treated as universal facts for every project.
-
-Agent Chassis is **constraint engineering**. 🛡️ It does not teach agents how to sound helpful; it gives them a maintained skeleton for project entry, agent rules, engineering rules, factual baseline, evidence-backed to-do plan, user-facing docs, and quality control.
+This repository root `README.md` is the public GitHub homepage for Agent Chassis. It is not one of the six controlled documents and is not copied as the instantiated target project's controlled `README.md`.
 
 ---
 
-## How to Use It 🧭
+## What Agent Chassis Provides 🧰
 
-Use Agent Chassis in two steps:
-
-1. Copy the contents of `agent-chassis/` into your target project root, including same-level `BOOTSTRAP.md` and the six controlled document templates.
-2. Ask your AI agent to read the same-level `BOOTSTRAP.md` startup file in that target project to instantiate those templates against the target project's real facts.
-
-`agent-chassis/BOOTSTRAP.md` is a one-time startup file that physically coexists with the six templates before instantiation. It is not a seventh controlled document, not a runtime rule, not part of version synchronization, not part of the six-document output scope, and not part of later project maintenance. After instantiation, ongoing work is governed by the target project's own `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
-
----
-
-## The Six-Document Skeleton 🦴
+Agent Chassis packages a reusable project-maintenance skeleton under `agent-chassis/`:
 
 ```text
-project-root/
-├── README.md              <- Human entry: what this is and where to start
-├── AGENTS.md              <- Agent entry: loading rules, priority, quality guard
+agent-chassis/
+├── BOOTSTRAP.md           <- One-time startup file for instantiation
+├── README.md              <- Project entry, summary, and navigation template
+├── AGENTS.md              <- Agent execution rules and quality guard summary
 ├── agents/
 │   ├── RULES.md           <- Engineering rules and detailed quality guard
-│   ├── BASE.md            <- Current factual baseline
-│   └── TODO.md            <- To-do plan and confirmed known issues
+│   ├── BASE.md            <- Current factual baseline template
+│   └── TODO.md            <- Follow-up implementation plan template
 └── doc/
-    └── DOCUMENTATION.md   <- Formal user manual
+    └── DOCUMENTATION.md   <- Formal user manual template
 ```
 
-The six documents are not interchangeable. `README.md` is the project-facing entry, `AGENTS.md` is the agent execution entry, `agents/RULES.md` is the detailed rulebook, `agents/BASE.md` records current facts, `agents/TODO.md` records evidence-backed follow-up work, and `doc/DOCUMENTATION.md` is the public user manual.
+`BOOTSTRAP.md` physically coexists with the six templates before instantiation, but it is only a one-time startup file. It is not a seventh controlled document, not a runtime rule, not part of six-document synchronization, not part of the six-document output scope, and not part of later project maintenance.
 
-This root homepage is outside that skeleton. It explains the template as a public open-source project; it is not copied as the instantiated project's controlled `README.md`.
+After instantiation, ongoing work is governed by the target project's six controlled documents: `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
 
 ---
 
-## Features & Innovations ✨
+## Why It Exists 🤔
 
-### Automatic Quality Guard
+AI-assisted projects often fail for predictable reasons:
 
-Quality control is embedded into ordinary work. Users do not manually operate checklists, command stages, or phase selectors. The agent selects lightweight or full coverage from task risk and impact scope, then reports the quality result as part of the normal task outcome.
+- 🗑️ Engineering rules, project facts, follow-up plans, and user documentation are mixed into one instruction blob.
+- 📉 Strong constraints quietly weaken from "must" to "should" during repeated edits.
+- 🌊 Agents lose ownership boundaries after context refresh and start editing the wrong layer.
+- 🎯 Template examples are mistaken for project facts.
+- 🧩 Public API, CLI, SDK, service, configuration, user interface, data format, deployment, operations, and documentation entries are not separated from internal implementation details.
 
-Lightweight and full coverage modes are selected internally based on task risk and impact. Full coverage domains include their corresponding lightweight capabilities, with earlier checks implicitly covered when deeper checks are required.
+Agent Chassis treats these as document-architecture problems. It gives each responsibility a fixed document owner, requires facts to come from evidence, and embeds quality control into ordinary work instead of relying on manually operated checklists.
 
-### Public Entries, API, and ABI
+---
 
-Agent Chassis treats a public entry as any user-visible, user-obtainable, and user-verifiable API, CLI, SDK, service, plugin, protocol, configuration, UI, data format, model entry, deployment entry, operations entry, or documentation entry. API and ABI are kept separate: API is a user-facing usage contract; ABI exists only when binary compatibility commitments exist. Projects without binary commitments should not invent ABI facts.
+## Current Workflow 🧭
 
-### Factual Baseline
+Use Agent Chassis by placing the startup file and six templates into the target project, then asking an AI agent to instantiate them against real project facts:
 
-`agents/BASE.md` records current facts only. Missing evidence becomes `not applicable`, `not established`, or `pending confirmation`; it does not become a fabricated capability.
+1. Copy the contents of `agent-chassis/` into the target project root.
+2. Ask the agent to read the same-level `BOOTSTRAP.md` startup file.
+3. Review the parameter confirmation report generated by `BOOTSTRAP.md`.
+4. Confirm the target project facts, output paths, document language, version, date, and text-format policy.
+5. Let the agent generate or update the six controlled documents from verifiable project evidence.
 
-### Evidence-Backed To-Do Plan
+`BOOTSTRAP.md` supports two startup modes:
 
-`agents/TODO.md` records confirmed follow-up work, known issues, evidence locations, first actions, and verification suggestions. It is not a bucket for guesses, vague future ideas, or template placeholders.
+| Mode | Use case |
+| --- | --- |
+| `auto_current_project` | The target project already contains same-level `BOOTSTRAP.md` and the six templates. |
+| `explicit_template_source` | The user provides a directory containing the six templates and asks the agent to write them into a target project. |
 
-### Formal User Manual Boundary
+---
 
-`doc/DOCUMENTATION.md` is based on public facts. It explains released or explicitly marked preview capabilities, and it must not expose internal maintenance flows or redefine project facts.
+## Six Controlled Documents 🦴
+
+| Document | Responsibility |
+| --- | --- |
+| `README.md` | Project entry, project summary, capability boundary summary, usage entries, and document navigation. |
+| `AGENTS.md` | Agent execution rules, loading order, automatic quality guard summary, document priority, version synchronization, and high-level red lines. |
+| `agents/RULES.md` | Detailed engineering rules, coding style, public-entry and compatibility constraints, tests, build, installation, document maintenance, automatic quality-control workflows, and formal user manual writing rules. |
+| `agents/BASE.md` | Current factual baseline, including project positioning, public entries, directory responsibilities, build and installation, test entries, and capability status. |
+| `agents/TODO.md` | Confirmed follow-up implementation plans, known issues, evidence locations, impact scope, first actions, and verification suggestions. |
+| `doc/DOCUMENTATION.md` | Formal user manual for release users, explaining only public capabilities that are user-visible, released, or explicitly marked with status. |
+
+The six documents are synchronized as a controlled set, but they are not interchangeable. Rules stay in rule documents, facts stay in the factual baseline, follow-up work stays in the to-do plan, and user-facing usage content stays in the formal manual.
+
+---
+
+## Quality Guard Model ✨
+
+Agent Chassis uses an automatic and unobtrusive quality guard. Users do not manually operate quality commands, phase selectors, or checklist stages. The agent selects the required quality-control strength based on task risk, impact scope, file type, change scope, and user requirements, then reports the result as part of the ordinary task outcome.
+
+Lightweight automatic quality-control mode covers:
+
+```text
+incremental difference domain -> incremental security domain -> factual boundary domain -> document quality domain
+```
+
+Full automatic quality-control mode covers:
+
+```text
+public impact domain -> global security domain -> static analysis domain -> documentation release domain
+```
+
+Full coverage strictly includes the corresponding lightweight capabilities: `public impact domain` includes `incremental difference domain`, `global security domain` includes `incremental security domain`, `static analysis domain` includes `factual boundary domain`, and `documentation release domain` includes `document quality domain`.
+
+---
+
+## Fact and Public-Surface Discipline 🧭
+
+Agent Chassis distinguishes public facts from private implementation details:
+
+- Public entries include user-visible, user-obtainable, and user-verifiable APIs, CLIs, SDKs, services, plugins, protocols, configurations, user interfaces, data formats, model entries, deployment entries, operations entries, and documentation entries.
+- API is a user-facing usage contract. ABI applies only when exported symbols, calling conventions, type layouts, link artifacts, or binary compatibility commitments exist.
+- Missing or unverifiable facts must be marked `not applicable`, `not established`, or `pending confirmation`; they must not be fabricated from placeholders or examples.
+- Code indexes, symbol references, call relationships, and semantic retrieval can be used for locating facts, but current readable project evidence remains authoritative.
+- The formal user manual must explain public, stable, user-observable behavior and must not expose internal maintenance flow, private paths, implementation-only objects, or temporary draft process.
+
+---
+
+## Subagent and Workflow Discipline 🤖
+
+The templates define how agents should split complex work while preserving ownership boundaries:
+
+- Read-only exploration, inventory, fact verification, and review use `explore` or an equivalent read-only subagent type.
+- Writing, draft generation, version synchronization, formal document revision, or to-do plan updates use `general` or an equivalent read/write subagent type.
+- Mixed read/write tasks are split into a read-only phase and a writing phase.
+- Same-file writes are not parallelized.
+- Subagent capability and safe concurrency must be detected in the current execution mode instead of inherited from a previous run.
+
+This keeps the main agent focused on decision-making, dependency resolution, ownership boundaries, and final acceptance instead of loading every detail into one context.
 
 ---
 
 ## Quick Start ⚡
 
 ```bash
-# 1. Copy the contents of agent-chassis/ into your project root.
-#    This places BOOTSTRAP.md at the same level as the six templates.
+# 1. Copy all files under agent-chassis/ into your target project root.
+#    BOOTSTRAP.md should sit at the same level as README.md, AGENTS.md,
+#    agents/RULES.md, agents/BASE.md, agents/TODO.md, and doc/DOCUMENTATION.md.
 
-# 2. Ask your AI agent to read the same-level BOOTSTRAP.md startup file.
+# 2. Ask your AI coding agent to read BOOTSTRAP.md.
 
-# 3. Review the generated instantiation plan.
-#    Confirm the target project facts and output paths, then approve execution.
+# 3. Review the parameter confirmation report.
+#    Confirm startup mode, output paths, version, date, language, fact sources,
+#    text format, and subagent policy before generation or update proceeds.
 
-# 4. After instantiation, configure your AI coding tool
-#    to load AGENTS.md as the project instruction entry.
+# 4. After instantiation, configure your AI coding tool to load AGENTS.md
+#    as the project instruction entry.
 ```
+
+---
+
+## Suitable Projects 🎯
+
+Agent Chassis is intended for projects that need:
+
+- A durable project entry and document navigation structure.
+- Clear separation between rules, facts, follow-up plans, and user-facing documentation.
+- Evidence-backed public API, ABI, CLI, SDK, service, configuration, deployment, operations, and documentation boundaries.
+- Automatic quality control embedded in ordinary AI-assisted work.
+- Controlled evolution of engineering rules without silent constraint weakening.
+- Formal user manuals that stay aligned with current public facts.
+
+It is intentionally generic: it does not assume a programming language, build system, platform, API style, ABI model, deployment method, or release process until a target project supplies verifiable facts.
 
 ---
 
 ## Design Principles 🏗️
 
-- **Constraints over suggestions.** "Must" stays "must." 🔒
-- **Isolation over mixing.** Six documents, six jobs. 📦
-- **Automatic quality over manual ceremony.** The guard runs inside ordinary work. ⛓️
-- **Placeholders over fabrication.** `{{%...}}` means "fill from evidence," not "make something up." 🎯
-- **Public facts over private assumptions.** User-visible entries, API/ABI boundaries, and manual content must trace to evidence. 🧭
+- **Constraints over suggestions.** Strong requirements stay strong across maintenance. 🔒
+- **Responsibility isolation over mixed prompts.** Each controlled document has one primary job. 📦
+- **Evidence over fabrication.** Placeholders must be filled from real project facts or marked as not applicable. 🎯
+- **Public facts over private assumptions.** User-facing documentation must trace to public, verifiable behavior. 🧭
+- **Automatic quality over manual ceremony.** Quality guard coverage is selected inside ordinary tasks, not by user-operated quality commands. ⛓️
+- **Current worktree over stale memory.** Indexes, caches, old sessions, and external retrieval results are only aids; current readable evidence remains authoritative. 🧠
 
 ---
 
-*Built for people who are tired of context drift.* 🏹
+*Built for projects that need AI agents to preserve constraints, facts, and documentation boundaries over long-term maintenance.* 🏹
