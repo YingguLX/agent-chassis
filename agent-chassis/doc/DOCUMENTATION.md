@@ -4,15 +4,15 @@ Document version: `{{%DOCUMENT_VERSION}}`
 
 Applicable version: `{{%APPLICABLE_PRODUCT_VERSION}}`
 
-Release date: `{{%RELEASE_DATE}}`
+Release date: `{{%UPDATED_DATE}}`
 
 Document status: `{{%DOCUMENT_STATUS}}`
 
 This document is written for end users, integration developers, and operations users. It describes released capabilities and public preview capabilities whose status is explicitly marked.
-This document keeps only public facts that users can obtain, verify, and execute.
+This document keeps only public facts that users can obtain, verify, and act on.
 Public entries include API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment, operations, and documentation entry. Actual applicability is governed by released public materials, the applicable version, and public-entry facts; the public-entry chapter matrix in this manual only summarizes and navigates those facts.
-This document **does not commit** to unpublished capabilities, internal processes, or content whose applicability is not marked.
-Features, entries, configurations, examples, and limitations in the body text may be used as user basis only when their owning version and public entry are applicable.
+This document **does not commit to unpublished capabilities, internal processes, or content whose applicability is not marked**.
+Features, entries, configurations, examples, and limitations in the body text may be relied on by users only when their owning version and public entry are applicable.
 Applicability for all public-entry chapters comes from confirmed public facts and is summarized in the public-entry chapter matrix. An entry marked not applicable only means the current product does not provide a user-reliable usage commitment for that entry.
 
 ## Table of Contents
@@ -156,7 +156,7 @@ Readers can locate the public capabilities covered by this document from user-ob
 | Product name | `{{%PRODUCT_NAME}}` |
 | Document version | `{{%DOCUMENT_VERSION}}` |
 | Applicable product version | `{{%APPLICABLE_PRODUCT_VERSION}}` |
-| Release date | `{{%RELEASE_DATE}}` |
+| Release date | `{{%UPDATED_DATE}}` |
 | Document status | `{{%DOCUMENT_STATUS}}` |
 | Intended readers | `{{%INTENDED_READERS}}` |
 | Primary entry | `{{%PUBLIC_ENTRY}}` |
@@ -188,14 +188,14 @@ This path answers "how do I embed product capabilities into an existing system?"
 #### 1.3.3 Operations Users and Administrators
 
 When the product provides deployment or operations entries, start with acquisition, configuration, deployment, operations, security and compliance, quota limits, and diagnostic information. When it does not, read the applicable public-entry chapters.
-This path answers "how do I run, upgrade, roll back, and troubleshoot stably?"
+This path answers "how do I run stably, upgrade, roll back, and troubleshoot issues?"
 
 ### 1.4 Applicability Boundary
 
 #### 1.4.1 Released Capabilities
 
 **Describe only** features, entries, commands, configuration, and constraints within `{{%RELEASED_CAPABILITY_SCOPE}}`.
-Public preview capabilities **must explicitly mark** status, limits, and compatibility commitments.
+Public preview capabilities **must have their status, limits, and compatibility commitments explicitly marked**.
 
 #### 1.4.2 Non-Public Content
 
@@ -687,7 +687,7 @@ The deprecation policy lists deprecation markers, replacements, transition perio
 
 - ***Unpublished entries are not usable capabilities.***
 - **Roadmap items not marked as public preview are not compatibility commitments.**
-- ***Internal implementation, internal diagnostics, private configuration, unpublished tools, and unreleased interfaces are not user-dependable interfaces.***
+- ***Internal implementation, internal diagnostics, private configuration, unpublished tools, and unreleased interfaces are not interfaces that users can rely on.***
 
 ### 8.5 Migration Guide
 
@@ -711,7 +711,7 @@ The migration scope lists affected versions, entries, configuration, data, and c
 
 | Version | Date | Change | Compatibility impact |
 | --- | --- | --- | --- |
-| `{{%CHANGE_VERSION}}` | `{{%RELEASE_DATE}}` | `{{%CHANGE_DESCRIPTION}}` | `{{%COMPATIBILITY_IMPACT}}` |
+| `{{%CHANGE_VERSION}}` | `{{%UPDATED_DATE}}` | `{{%CHANGE_DESCRIPTION}}` | `{{%COMPATIBILITY_IMPACT}}` |
 
 ## 9. Troubleshooting and FAQ
 
@@ -806,4 +806,4 @@ List user-accessible public materials, standards, protocols, product pages, or e
 - At least one minimal example for an applicable public entry has been run, and the verifiable result has been saved.
 - The limits, error codes, diagnostic information, and support entry for the truly applicable entry are understood.
 - **No unpublished entry, internal implementation detail, or uncommitted behavior is being relied upon.**
-- Only **confirmed public facts and public capabilities** in entries and corresponding chapters marked applicable by the public-entry chapter matrix are being used.
+- It has been confirmed that **only confirmed public facts, public entries marked applicable in the public-entry chapter matrix, and public capabilities in the corresponding chapters are being used**.

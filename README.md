@@ -25,10 +25,10 @@ Agent Chassis is **constraint engineering**. 🛡️ It does not teach agents ho
 
 Use Agent Chassis in two steps:
 
-1. Copy the six controlled document templates under `agent-chassis/` into your target project root.
-2. Copy the text from `BOOTSTRAP.md` into your AI agent chat to instantiate those templates against the target project's real facts.
+1. Copy the contents of `agent-chassis/` into your target project root, including same-level `BOOTSTRAP.md` and the six controlled document templates.
+2. Ask your AI agent to read the same-level `BOOTSTRAP.md` startup file in that target project to instantiate those templates against the target project's real facts.
 
-`BOOTSTRAP.md` is a one-time bootstrap prompt. Copy its text into the chat; do not copy the file into the target project. It is not a seventh controlled document, not a runtime rule, not part of version synchronization, and not part of later project maintenance. After instantiation, ongoing work is governed by the target project's own `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
+`agent-chassis/BOOTSTRAP.md` is a one-time startup file that physically coexists with the six templates before instantiation. It is not a seventh controlled document, not a runtime rule, not part of version synchronization, not part of the six-document output scope, and not part of later project maintenance. After instantiation, ongoing work is governed by the target project's own `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, and `doc/DOCUMENTATION.md`.
 
 ---
 
@@ -58,7 +58,7 @@ This root homepage is outside that skeleton. It explains the template as a publi
 
 Quality control is embedded into ordinary work. Users do not manually operate checklists, command stages, or phase selectors. The agent selects lightweight or full coverage from task risk and impact scope, then reports the quality result as part of the normal task outcome.
 
-Lightweight and full coverage modes are selected internally based on task risk and impact, with earlier checks implicitly covered when deeper checks are required.
+Lightweight and full coverage modes are selected internally based on task risk and impact. Full coverage domains include their corresponding lightweight capabilities, with earlier checks implicitly covered when deeper checks are required.
 
 ### Public Entries, API, and ABI
 
@@ -81,10 +81,10 @@ Agent Chassis treats a public entry as any user-visible, user-obtainable, and us
 ## Quick Start ⚡
 
 ```bash
-# 1. Copy the six controlled document templates into your project root
-#    from the agent-chassis/ directory in this repository.
+# 1. Copy the contents of agent-chassis/ into your project root.
+#    This places BOOTSTRAP.md at the same level as the six templates.
 
-# 2. Open BOOTSTRAP.md and paste its text into your AI agent chat.
+# 2. Ask your AI agent to read the same-level BOOTSTRAP.md startup file.
 
 # 3. Review the generated instantiation plan.
 #    Confirm the target project facts and output paths, then approve execution.

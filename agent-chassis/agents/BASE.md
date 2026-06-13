@@ -13,18 +13,18 @@
 
 This file does not carry agent control rules, detailed engineering rules, automatic quality guard details, user manual writing rules, the formal user manual, follow-up implementation plans, or known issue records. It records only rule ownership and factual maintenance relationships. The authoritative locations for corresponding facts are: `AGENTS.md` for agent control entry, `agents/RULES.md` for detailed engineering rules, automatic quality guard, and user manual writing rules, `README.md` for project summary, `agents/TODO.md` for follow-up plans and known issues, and `doc/DOCUMENTATION.md` for the formal user manual.
 
-When source code, public entries, API/interface boundaries, build scripts, test entries, installation logic, directory responsibilities, or current capability status change as facts, this file **records only the current facts within this file's responsibility**. Cross-document version synchronization, automatic quality guard, and user manual output processes are maintained by `AGENTS.md` and `agents/RULES.md`. Confirmed factual gaps and known issues are carried by `agents/TODO.md`.
+When source code, public entries, API/interface boundaries, build scripts, test entries, installation logic, directory responsibilities, or current capability status change as facts, this file **records only the current facts within this file's responsibility**. Cross-document version synchronization, automatic quality guard, and formal user manual release processes are maintained by `AGENTS.md` and `agents/RULES.md`. Confirmed factual gaps and known issues are carried by `agents/TODO.md`.
 
 Current controlled-rule facts are: Chapter 10 of `agents/RULES.md` maintains build and installation, document maintenance, automatic quality guard, underlying fact derivation, task risk level, automatic quality-loop level, text-format validation, and verification boundaries; Chapter 11 maintains lightweight automatic quality-control rules; Chapter 12 maintains full automatic quality-control rules; Chapter 13 maintains formal user manual writing rules, templates, confidentiality boundaries, and checklists. The complete list of fixed protocol constants, automatic quality guard summary, and execution details are defined in `AGENTS.md` / `agents/RULES.md`; this file only references the existence and ownership of these rules and ***does not copy*** their executable protocols.
 
 ## 3. Automatic Quality-Guard Rule Ownership
 
-The automatic quality guard, as a controlled-rule fact, belongs to `AGENTS.md` and `agents/RULES.md`. This file only records its factual baseline relationship and ***must not copy*** per-quality-domain task briefs, subagent lifecycles, or formal manual output details.
+The automatic quality guard, as a controlled-rule fact, belongs to `AGENTS.md` and `agents/RULES.md`. This file only records its factual baseline relationship and ***must not copy*** per-quality-domain task briefs, subagent lifecycles, or formal user manual release details.
 
 - Automatic quality-domain chain: The quality-domain lists, serial order, and execution details of the lightweight/full automatic quality-control groups are governed by `AGENTS.md` and `agents/RULES.md`; this file records only rule ownership and factual maintenance relationships.
 - Underlying fact derivation: Fact/assumption/experience-based solution/preference distinction, blocker handling, plan-readiness gates, and acceptance tie-back for complex ordinary tasks are governed by `AGENTS.md` and `agents/RULES.md`; this file records only capability ownership and does not copy the state machine or execution protocol.
 - Automatic quality loop: task risk levels, automatic quality-loop level, plan fields, chain-level stops, acceptance outputs, and to-do plan recording criteria are governed by `AGENTS.md` and `agents/RULES.md`; this file records only rule ownership and does not copy the judgment matrix or execution protocol.
-- Factual maintenance relationship: When the automatic quality-domain chain, quality-domain orchestration rules, automatic quality-loop rules, `explore` / `general` or equivalent capability type ownership, task dependency graph, read/write ownership, to-do plan thresholds, or formal user manual output boundaries change as facts, this file only records rule ownership and current factual impact. Detailed execution authority remains in the automatic quality guard chapter of `AGENTS.md` and Chapters 10-13 of `agents/RULES.md`.
+- Factual maintenance relationship: When the automatic quality-domain chain, quality-domain orchestration rules, automatic quality-loop rules, `explore` / `general` or equivalent capability type ownership, task dependency graph, read/write ownership, to-do plan thresholds, or formal user manual release boundaries change as facts, this file only records rule ownership and current factual impact. Detailed execution authority remains in the automatic quality guard chapter of `AGENTS.md` and Chapters 10-13 of `agents/RULES.md`.
 
 ## 4. Project Positioning
 
@@ -53,7 +53,7 @@ API, ABI, CLI, SDK, service, plugin, protocol, configuration, user interface, da
 | --- | --- | --- | --- | --- | --- |
 | `{{%PUBLIC_ENTRY_CATEGORY}}` | `{{%PUBLIC_ENTRY_LOCATION_OR_IDENTIFIER}}` | `{{%STABILITY_LEVEL}}` | `{{%USER_RESPONSIBILITY}}` | `{{%PROJECT_RESPONSIBILITY}}` | `{{%NOTES}}` |
 
-Authoritative public-entry fact sources must be recorded separately. A source may be a public declaration file, OpenAPI or protocol schema, CLI help, SDK package metadata, user documentation, plugin list, configuration description, interface entry, data format description, model entry description, deployment description, operations description, or equivalent public material. When no verifiable source exists, write `not established`; do not infer public capabilities from reserved template fields.
+Authoritative public-entry fact sources must be recorded separately. A source may be a public declaration file, OpenAPI or protocol schema, CLI help, SDK package metadata, user documentation, plugin list, configuration description, user interface entry, data format description, model entry description, deployment description, operations description, or equivalent public material. When no verifiable source exists, write `not established`; do not infer public capabilities from reserved template fields.
 
 | Fact source category | Location or identifier | Covered entry | Confidence | Notes |
 | --- | --- | --- | --- | --- |
@@ -79,7 +79,7 @@ If the project is a C/C++ local library, binary-compatibility-sensitive project,
 
 Directory responsibilities must distinguish public entries, internal implementation, test entries, build entries, generated directories, installation artifacts, third-party dependencies, document directories, and tool configuration directories. Non-public directories must not be written into the user manual as stable usage entries. Generated directories, cache directories, and temporary directories must not be written as factual authorities.
 
-If the project contains third-party, vendored, or independent dependencies, their boundaries, licenses or reference sources, modification permissions, whether they are handled by interface-level coverage, and whether they participate in release artifacts should be marked in the table. If the project has no corresponding directory, fill `not applicable`; do not retain vague paths.
+If the project contains third-party, derived, or independent dependencies, their boundaries, licenses or reference sources, modification permissions, whether they are handled by interface-level coverage, and whether they participate in release artifacts should be marked in the table. If the project has no corresponding directory, fill `not applicable`; do not retain vague paths.
 
 ## 7. Build and Installation Facts
 
@@ -95,13 +95,24 @@ Build, installation, and release facts must be governed by real current project 
 
 When only the six controlled documents, user documentation, or templated documents are modified and source code, public entries, API/interface boundaries, build scripts, test entries, or installation logic are not touched, build facts may be recorded as `not applicable` or `not executed`; build execution and reporting requirements belong to `AGENTS.md` and `agents/RULES.md`.
 
+### 7.1 Automated Build Entry Inventory
+
+Automated build entries must record relative paths or task locations relative to the controlled project root and ***must not*** record drive letters, user directories, temporary directories, or other local absolute paths. If an entry comes from a recursive call chain in scripts, build configurations, CI workflows, or task orchestration files, the recursive source must be recorded. If dangerous resource shutdown operations are found or an equivalent safe full-validation path cannot be established, the dangerous operation status, equivalent safe full-validation entry, and notes must state that fact, and candidate issues must be recorded in `agents/TODO.md`.
+
+| Purpose | Entry type | Relative path or task location | Recursive source | Coverage scope | Dangerous operation status | Equivalent safe full-validation entry | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Full build | `{{%ENTRY_TYPE}}` | `{{%RELATIVE_PATH_OR_TASK_LOCATION}}` | `{{%RECURSIVE_SOURCE}}` | `{{%COVERAGE_SCOPE}}` | `{{%DANGEROUS_OPERATION_STATUS}}` | `{{%EQUIVALENT_SAFE_FULL_VALIDATION_ENTRY}}` | `{{%NOTES}}` |
+| Build cleanup | `{{%ENTRY_TYPE}}` | `{{%RELATIVE_PATH_OR_TASK_LOCATION}}` | `{{%RECURSIVE_SOURCE}}` | `{{%COVERAGE_SCOPE}}` | `{{%DANGEROUS_OPERATION_STATUS}}` | `{{%EQUIVALENT_SAFE_FULL_VALIDATION_ENTRY}}` | `{{%NOTES}}` |
+| Test validation | `{{%ENTRY_TYPE}}` | `{{%RELATIVE_PATH_OR_TASK_LOCATION}}` | `{{%RECURSIVE_SOURCE}}` | `{{%COVERAGE_SCOPE}}` | `{{%DANGEROUS_OPERATION_STATUS}}` | `{{%EQUIVALENT_SAFE_FULL_VALIDATION_ENTRY}}` | `{{%NOTES}}` |
+| Package/install/deploy | `{{%ENTRY_TYPE}}` | `{{%RELATIVE_PATH_OR_TASK_LOCATION}}` | `{{%RECURSIVE_SOURCE}}` | `{{%COVERAGE_SCOPE}}` | `{{%DANGEROUS_OPERATION_STATUS}}` | `{{%EQUIVALENT_SAFE_FULL_VALIDATION_ENTRY}}` | `{{%NOTES}}` |
+
 ## 8. Test Entry Facts
 
 | Test or verification category | Current entry | Coverage scope | Automation status | Notes |
 | --- | --- | --- | --- | --- |
 | `{{%TEST_OR_VERIFICATION_CATEGORY}}` | `{{%TEST_ENTRY}}` | `{{%TEST_COVERAGE_SCOPE}}` | `{{%AUTOMATION_STATUS}}` | `{{%NOTES}}` |
 
-Test facts must distinguish automated tests, manual verification, interactive verification, performance observation, security verification, structural coverage, document quality, pre-release checks, and user acceptance. Performance prints, sample output, menu interaction, screenshots, logs, or temporary persisted results cannot replace correctness criteria unless the instantiated project explicitly defines them as verification entries and states their limitations.
+Test facts must distinguish automated tests, manual verification, interactive verification, performance observation, security verification, static analysis, document quality, pre-release checks, and user acceptance. Performance prints, sample output, menu interaction, screenshots, logs, or temporary persisted results cannot replace correctness criteria unless the instantiated project explicitly defines them as verification entries and states their limitations.
 
 When there is currently no entry for a type of test, write `not applicable` or `not established`. Only when that test entry is a verification capability the project should have but has not established should a follow-up plan be recorded in `agents/TODO.md` according to evidence. Do not write unestablished test entries as covered.
 
@@ -122,7 +133,7 @@ The following fact changes should trigger a synchronized check of this file:
 - Changes to API, CLI, SDK, service, plugin, protocol, configuration, user interface, data format, model entry, deployment entry, operations entry, documentation entry, foundational types, public structures, export macros, calling conventions, or other public commitments.
 - Changes to build entries, build systems, release processes, installation artifacts, resource generation, script behavior, container images, deployment methods, or package management information.
 - Changes to responsibilities of public directories, source directories, runtime entries, test entries, build entries, document directories, installation artifact directories, generated directories, cache directories, or tool configuration directories.
-- Changes to test entries, automation status, verification methods, performance observation, security verification, structural coverage, document quality, or result persistence conventions.
+- Changes to test entries, automation status, verification methods, performance observation, security verification, static analysis, document quality, pre-release checks, or result persistence conventions.
 - Changes to current capability status, such as completion of placeholder capabilities, public release of internal capabilities, completion of test entries, narrowing of release scope, or closure of known issues.
 - Changes to responsibility relationships among the six controlled documents, version synchronization rules, automatic quality-domain chain, quality-domain orchestration rules, automatic quality-loop rules, formal user manual maintenance boundaries, table-of-contents evolution rules, source-reading constraints, or confidentiality boundaries.
 - Changes to rule ownership for underlying fact derivation, blocker handling, plan-readiness gates, explicit-assumption recording, or complex ordinary-task acceptance tie-back.
@@ -132,25 +143,25 @@ The following fact changes should trigger a synchronized check of this file:
 
 ### Instantiation Checklist
 
-This checklist is a representative template-stage checklist. During instantiation or later template maintenance, this file's full text **must first be scanned** for every valid `{{%...}}` placeholder and a deduplicated set must be established. This checklist ***must not replace*** full-file scan results. The ellipsis form `{{%...}}` does not count as a fill item when it is used only as syntax explanation. After instantiation is complete, this entire chapter and `### Placeholder Checklist` ***must be deleted*** and must not remain in formal output.
+This checklist is a representative template-stage checklist. During instantiation or later template maintenance, this file's full text **must first be scanned** for every valid `{{%...}}` placeholder and a deduplicated set must be established. This checklist ***must not replace*** full-file scan results. The ellipsis form `{{%...}}` does not count as a fill item when it is used only as syntax explanation. After instantiation is complete, this entire section and `### Placeholder Checklist` ***must be deleted*** and must not remain in formal output.
 
 When instantiating this file, check and fill only factual fields within `agents/BASE.md`:
 
-- Version and date: `{{%DOCUMENT_VERSION}}`, `{{%UPDATED_DATE}}`, synchronized document version identifiers, and factual scope.
+- Version and date: `{{%DOCUMENT_VERSION}}`, `{{%UPDATED_DATE}}` in YYYY-MM-DD format, synchronized document version identifiers, and factual scope.
 - Project identity and positioning: `{{%PROJECT_NAME}}`, project domain, project type, primary delivery form, primary language or runtime, primary user role, primary maintainer role, and release scope.
 - Public entry and source root: primary public entry, authoritative public-entry fact source, source or content root, runtime entry, public entry category, entry location or identifier, stability level, user responsibility, project responsibility, and notes.
 - Compatibility and current-status tables: applicability, current facts, verification entries, and change risks for API, ABI, data format, configuration format, and protocol or service contract; capability domain, current status, public entry, evidence location, test status, and notes.
 - Directory responsibilities: directory path, directory responsibility, external stability, fact notes, and distinctions among public entries, internal implementation, test entries, build entries, generated directories, installation artifacts, third-party dependencies, document directories, and tool configuration directories.
 - Build, installation, release, and resource facts: build system, build entry, build configuration matrix, installation or release entry, release package structure, resource or metadata, verification methods, and notes.
-- Test and verification facts: test or verification category, test entry, test coverage scope, automation status, performance observation, global security domain, structural coverage domain, document quality domain, pre-release checks, and user acceptance fact states.
+- Test and verification facts: test or verification category, test entry, test coverage scope, automation status, performance observation, security verification, static analysis, document quality, pre-release checks, and user acceptance fact states.
 - Evidence, status, and risk fields: covered public entry, fact source confidence, fact source notes, change risk, evidence location, test status, current capability status, and maintenance trigger conditions.
 - Status words: statuses such as `not applicable`, `not established`, `placeholder`, `internal`, `preview`, `released`, and `deprecated` must be filled according to current project facts and must retain verifiable basis.
 
 ### Placeholder Checklist
 
-This checklist lists at most 10 representative or key placeholders or categories. The full handling scope is governed by full-file scan results for valid `{{%...}}` placeholders. When any placeholder is added, deleted, or renamed, handling rules **must be updated** according to scan results. The items below ***must not be maintained alone***.
+This checklist lists **at most 10 items** of representative or key placeholders or categories. The full handling scope is governed by full-file scan results for valid `{{%...}}` placeholders. When any placeholder is added, deleted, or renamed, handling rules **must be updated** according to scan results. The items below ***must not be maintained alone***.
 
-- Metadata: `{{%PROJECT_NAME}}`, `{{%DOCUMENT_VERSION}}`, `{{%UPDATED_DATE}}`
+- Metadata: `{{%PROJECT_NAME}}`, `{{%DOCUMENT_VERSION}}`, `{{%UPDATED_DATE}}` in YYYY-MM-DD format
 - Factual-scope entries: `{{%PRIMARY_PUBLIC_ENTRY}}`, `{{%PUBLIC_ENTRY_AUTHORITY}}`, `{{%SOURCE_OR_CONTENT_ROOT}}`, `{{%RUNTIME_ENTRY}}`
 - Project positioning: `{{%PROJECT_DOMAIN}}`, `{{%PROJECT_TYPE}}`, `{{%PRIMARY_DELIVERY_FORM}}`, `{{%PRIMARY_LANGUAGE_OR_RUNTIME}}`
 - Roles and release scope: `{{%PRIMARY_USER_ROLE}}`, `{{%PRIMARY_MAINTAINER_ROLE}}`, `{{%RELEASE_SCOPE}}`
