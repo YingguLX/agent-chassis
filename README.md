@@ -69,8 +69,8 @@ Use Agent Chassis by placing the startup file and six templates into the target 
 | Document | Responsibility |
 | --- | --- |
 | `README.md` | Project entry, project summary, capability boundary summary, usage entries, and document navigation. |
-| `AGENTS.md` | Agent execution rules, loading order, automatic quality guard summary, document priority, version synchronization, and high-level red lines. |
-| `agents/RULES.md` | Detailed engineering rules, coding style, public-entry and compatibility constraints, tests, build, installation, document maintenance, automatic quality-control workflows, and formal user manual writing rules. |
+| `AGENTS.md` | Agent execution rules, loading order, automatic and unobtrusive quality guard, the hard write gate for project constraint documents, overall plan-management rules, version synchronization, document priority, minimum context, and high-level red lines. |
+| `agents/RULES.md` | Engineering rules, detailed plan management, task risk levels, automatic quality-loop rules, task orchestration rules, detailed quality guard rules, document maintenance rules, and user manual writing rules. |
 | `agents/BASE.md` | Current factual baseline, including project positioning, public entries, directory responsibilities, build and installation, test entries, and capability status. |
 | `agents/TODO.md` | Confirmed follow-up implementation plans, known issues, evidence locations, impact scope, first actions, and verification suggestions. |
 | `doc/DOCUMENTATION.md` | Formal user manual for release users, explaining only public capabilities that are user-visible, released, or explicitly marked with status. |

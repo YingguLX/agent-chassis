@@ -4,7 +4,7 @@
 
 - Current version: `{{%DOCUMENT_VERSION}}`
 - Updated: `{{%UPDATED_DATE}}`
-- Synchronized documents: `README.md` `{{%DOCUMENT_VERSION}}`, `AGENTS.md` `{{%DOCUMENT_VERSION}}`, `agents/RULES.md` `{{%DOCUMENT_VERSION}}`, `agents/BASE.md` `{{%DOCUMENT_VERSION}}`, `agents/TODO.md` `{{%DOCUMENT_VERSION}}`, `doc/DOCUMENTATION.md` `{{%DOCUMENT_VERSION}}`
+- Synchronized documents: `README.md {{%DOCUMENT_VERSION}}`, `AGENTS.md {{%DOCUMENT_VERSION}}`, `agents/RULES.md {{%DOCUMENT_VERSION}}`, `agents/BASE.md {{%DOCUMENT_VERSION}}`, `agents/TODO.md {{%DOCUMENT_VERSION}}`, `doc/DOCUMENTATION.md {{%DOCUMENT_VERSION}}`
 - Analysis scope: `{{%PRIMARY_PUBLIC_ENTRY}}`, `{{%SOURCE_OR_CONTENT_ROOT}}`, `{{%RUNTIME_ENTRY}}`, `{{%BUILD_ENTRY}}`, `{{%TEST_ENTRY}}`, `{{%INSTALL_OR_RELEASE_ENTRY}}`, `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `doc/DOCUMENTATION.md`
 
 ## 2. Document Role

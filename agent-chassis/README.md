@@ -4,7 +4,7 @@
 
 - Current version: `{{%DOCUMENT_VERSION}}`
 - Updated: `{{%UPDATED_DATE}}`
-- Synchronized documents: `README.md`, `AGENTS.md`, `agents/RULES.md`, `agents/BASE.md`, `agents/TODO.md`, `doc/DOCUMENTATION.md` (version: `{{%DOCUMENT_VERSION}}`)
+- Synchronized documents: `README.md {{%DOCUMENT_VERSION}}`, `AGENTS.md {{%DOCUMENT_VERSION}}`, `agents/RULES.md {{%DOCUMENT_VERSION}}`, `agents/BASE.md {{%DOCUMENT_VERSION}}`, `agents/TODO.md {{%DOCUMENT_VERSION}}`, `doc/DOCUMENTATION.md {{%DOCUMENT_VERSION}}`
 
 ## 2. Document Role
 
